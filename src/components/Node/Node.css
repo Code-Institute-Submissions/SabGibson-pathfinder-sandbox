@@ -1,0 +1,15 @@
+.start {
+  background-color: green;
+}
+
+.end {
+  background-color: red;
+}
+
+.visited {
+  background-color: gray;
+}
+
+.wall {
+  background-color: black;
+}
