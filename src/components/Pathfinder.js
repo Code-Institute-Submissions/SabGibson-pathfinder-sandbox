@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+import "./Pathfinder.css";
+import Node from "./Node/Node";
 
 const rows = 20;
 const cols = 50;
 
-function newNode(row, col) {
-  this.x = row;
-  this.y = col;
+function newNode(col, row) {
+  this.xVal = col;
+  this.yVal = row;
   this.isStart = false;
   this.isEnd = false;
   this.isWall = false;
@@ -15,29 +17,30 @@ function newNode(row, col) {
 const Pathfinder = () => {
   const gridInit = () => {
     const grid = [];
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < cols; i++) {
       const currentRow = [];
-      for (let j = 0; j < cols; j++) {
-        currentRow.push(newNode(row, col));
+      for (let j = 0; j < rows; j++) {
+        currentRow.push(new newNode(i, j));
       }
-
       grid.push(currentRow);
     }
     setActiveGrid(grid);
   };
+
   const [activeGrid, setActiveGrid] = useState([]);
-  const [mouseIsPressed, setMouseIsPressed] = useState(false);
+  //   const [mouseIsPressed, setMouseIsPressed] = useState(false);
   useEffect(() => {
     gridInit();
   }, []);
 
   const functionalGrid = (
-    <div>
+    <div className="sb-grid">
       {activeGrid.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
             {row.map((node, nodeIndex) => {
-              return <Node key={nodeIndex} prop={node} />;
+              console.log(node);
+              return <Node key={nodeIndex} node={node} />;
             })}
           </div>
         );
@@ -45,7 +48,7 @@ const Pathfinder = () => {
     </div>
   );
 
-  return <div className="pathfinder">{functionalGrid}</div>;
+  return <div className="sandbox">{functionalGrid}</div>;
 };
 
 export default Pathfinder;

@@ -1,0 +1,13 @@
+.sandbox {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.sb-grid {
+  width: 100%;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

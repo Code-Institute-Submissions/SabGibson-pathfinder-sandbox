@@ -1,12 +1,12 @@
 import "./Node.css";
 const Node = (props) => {
-  const params = props.prop;
+  const params = props.node;
   const isStart = params.isStart;
   const isEnd = params.isEnd;
   const isWall = params.isWall;
   const isVisited = params.isVisited;
-  const xVal = params.x;
-  const yVal = params.y;
+  const xVal = params.xVal;
+  const yVal = params.yVal;
 
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
   const wallClass = isWall ? "wall" : "";
