@@ -1,6 +1,6 @@
 import "./Node.css";
 const Node = (props) => {
-  // Decant parameters from prop variable
+  // Parameters from prop variable
   const params = props.node;
   const isStart = params.isStart;
   const isEnd = params.isEnd;

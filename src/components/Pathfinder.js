@@ -42,9 +42,18 @@ const Pathfinder = () => {
     gridInit();
   }, []);
 
-  // Pathfinder methods for interaction with grid
+  // Pathfinder functions for interaction with grid
+  // const makeWall = (node) => {};
+
+  // const delWall = () => {};
+
+  // const selectStartEnd = () => {};
+
   const functionTester = (node) => {
-    console.log(`ID${node.xVal}-${node.yVal}`);
+    const newGrid = activeGrid.slice();
+    node.isWall = !node.isWall;
+    newGrid[node.xVal][node.yVal] = node;
+    setActiveGrid(newGrid);
   };
 
   // Define return variable for the Pathfinder using Node component
@@ -58,7 +67,7 @@ const Pathfinder = () => {
                 <Node
                   key={nodeIndex}
                   node={node}
-                  mouseIsPressed={mouseIsPressed}
+                  // mouseIsPressed={mouseIsPressed}
                   functionTester={functionTester}
                 />
               );
