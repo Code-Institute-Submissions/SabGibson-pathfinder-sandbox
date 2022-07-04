@@ -36,23 +36,79 @@ const Pathfinder = () => {
   // Define React state hooks for grid and mouse input
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
+  const [startNode, setStartNode] = useState(null);
+  const [endNode, setEndNode] = useState(null);
 
   // Define effect hook of init of Pathfinder (gird) component
   useEffect(() => {
     gridInit();
   }, []);
 
-  // Pathfinder functions for interaction with grid
-  // const makeWall = (node) => {};
+  // Pathfinder methods for interaction with grid
 
-  // const delWall = () => {};
-
-  // const selectStartEnd = () => {};
-
-  const functionTester = (node) => {
+  // makeWallStart - function for starting new wall nodes
+  const makeWallStart = (node) => {
     const newGrid = activeGrid.slice();
-    node.isWall = !node.isWall;
+    if (node.isWall === false) {
+      node.isWall = true;
+      newGrid[node.xVal][node.yVal] = node;
+      setActiveGrid(newGrid);
+      setMouseIsPressed(true);
+    }
+  };
+
+  const makeWallConti = (node) => {
+    const newGrid = activeGrid.slice();
+    if (mouseIsPressed && node.isWall === false) {
+      node.isWall = true;
+      newGrid[node.xVal][node.yVal] = node;
+      setActiveGrid(newGrid);
+    }
+  };
+
+  const delWallStart = (node) => {
+    const newGrid = activeGrid.slice();
+    node.isWall = false;
     newGrid[node.xVal][node.yVal] = node;
+    setActiveGrid(newGrid);
+    setMouseIsPressed(true);
+  };
+
+  const deleWallConti = (node) => {
+    const newGrid = activeGrid.slice();
+    if (mouseIsPressed) {
+      node.isWall = false;
+      newGrid[node.xVal][node.yVal] = node;
+      setActiveGrid(newGrid);
+    }
+  };
+
+  const editEnd = () => {
+    setMouseIsPressed(false);
+  };
+
+  const startEndSelector = (node) => {
+    if (startNode == null && endNode == null) {
+      node.isStart = true;
+      node.isWall = false;
+      setStartNode(node);
+    } else if (endNode == null) {
+      node.isEnd = true;
+      node.isWall = false;
+      setEndNode(node);
+    } else if (startNode && endNode) {
+      node.isStart = false;
+      node.isWall = false;
+      setStartNode(null);
+    } else {
+      node.isEnd = false;
+      node.isWall = false;
+      setEndNode(null);
+    }
+
+    const newGrid = activeGrid.slice();
+    newGrid[node.xVal][node.yVal] = node;
+
     setActiveGrid(newGrid);
   };
 
@@ -67,8 +123,12 @@ const Pathfinder = () => {
                 <Node
                   key={nodeIndex}
                   node={node}
-                  // mouseIsPressed={mouseIsPressed}
-                  functionTester={functionTester}
+                  makeWallStart={makeWallStart}
+                  makeWallConti={makeWallConti}
+                  delWallStart={delWallStart}
+                  deleWallConti={deleWallConti}
+                  editEnd={editEnd}
+                  startEndSelector={startEndSelector}
                 />
               );
             })}

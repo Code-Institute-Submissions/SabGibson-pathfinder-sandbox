@@ -9,7 +9,13 @@ const Node = (props) => {
   const xVal = params.xVal;
   const yVal = params.yVal;
 
-  const functionTester = props.functionTester;
+  // unload methods
+  const makeWallStart = props.makeWallStart;
+  const makeWallConti = props.makeWallConti;
+  const delWallStart = props.delWallStart;
+  const deleWallConti = props.deleWallConti;
+  const editEnd = props.editEnd;
+  const startEndSelector = props.startEndSelector;
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
@@ -17,15 +23,39 @@ const Node = (props) => {
   const visitedClass = isVisited ? "visited" : "";
 
   // Define node methods for interaction with grid
-  const testFunc = () => {
-    functionTester(params);
+  const onMouseDown = (e) => {
+    if (e.altKey) {
+      delWallStart(params);
+    } else {
+      makeWallStart(params);
+    }
   };
+
+  const onMouseEnter = (e) => {
+    if (e.altKey) {
+      deleWallConti(params);
+    } else {
+      makeWallConti(params);
+    }
+  };
+
+  const onMouseUp = (e) => {
+    editEnd(params);
+  };
+
+  const ondblClick = () => {
+    startEndSelector(params);
+  };
+
   // Return Jsx node component
   return (
     <div
       className={`node ${terminalClass} ${wallClass} ${visitedClass}`}
       id={`id-${xVal}-${yVal}`}
-      onClick={testFunc}
+      onMouseDown={onMouseDown}
+      onMouseEnter={onMouseEnter}
+      onMouseUp={onMouseUp}
+      onClick={ondblClick}
     ></div>
   );
 };
