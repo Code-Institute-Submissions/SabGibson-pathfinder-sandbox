@@ -31,14 +31,12 @@ const Navigation = () => {
               </ul>
             </div>
           </div>
-          <div className="edit-wall-tools">
+          <div className="tools">
+            <img src={play} alt="start icon" className="action-icon" />
+            <img src={reset} alt="reset grid icon" className="action-icon" />
             <img src={wall} alt="build wall icon" className="action-icon" />
             <img src={bin} alt="delete wall icon" className="action-icon" />
             <img src={flag} alt="Start end icon" className="action-icon" />
-          </div>
-          <div className="control-tools">
-            <img src={play} alt="start icon" className="action-icon" />
-            <img src={reset} alt="reset grid icon" className="action-icon" />
           </div>
         </div>
       </nav>

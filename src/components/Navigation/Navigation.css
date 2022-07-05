@@ -1,17 +1,18 @@
-body {
+/* body {
   color: #fff;
-}
+} */
 .nav-bar {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   background-color: #006875;
+  position: relative;
 }
 
 .logo {
   display: flex;
   align-content: center;
   justify-content: center;
+  margin-left: 30px;
 }
 
 .logo-img {
@@ -30,5 +31,78 @@ body {
 
 .action-icon {
   fill: #fff;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin-right: 5px;
   cursor: pointer;
+  transition: ease 0.2s;
+}
+
+.action-icon:hover {
+  transform: rotateZ(7deg);
+}
+
+.select {
+  cursor: pointer;
+  border: 1px solid #6ff7f4;
+  min-width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select > span {
+  margin-left: 10px;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #000;
+  margin: 0px 10px;
+  transition: ease 0.3s;
+}
+
+.arrow-up {
+  transform: rotatez(180deg);
+}
+
+.algo-list {
+  display: none;
+  width: 300px;
+  position: absolute;
+  margin-top: 1px;
+  color: #004f59;
+  border: 2px solid #004f59;
+  background: #6ff7f4;
+  border-radius: 10px;
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+.algo-list > li {
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  margin: 3px 0px;
+  margin-left: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.algo-list > li:hover {
+  width: 90%;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.active-dropdown {
+  display: block;
 }
