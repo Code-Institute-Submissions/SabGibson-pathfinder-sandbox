@@ -20,22 +20,38 @@ const Navigation = () => {
         </div>
         <div className="tool-pane">
           <div className="algo-tools">
-            <Dropdown
-              dropdownItems={[
-                "Bredth First Search",
-                "Depth First Search",
-                "A* Search Algorith",
-                "Dijkstra's Search Algorithm",
-              ]}
-            />
-            <Dropdown dropdownItems={["Slow", "Normal", "Fast"]} />
+            <div className="nav-item">
+              <h3 className="nav-label">Select Algorithm</h3>
+              <Dropdown
+                dropdownItems={[
+                  "Breadth First Search",
+                  "Depth First Search",
+                  "A* Search Algorith",
+                  "Dijkstra's Search Algorithm",
+                ]}
+                default={"Breadth First Search"}
+              />
+            </div>
+            <div className="nav-item">
+              <h3 className="nav-label">Select Speed</h3>
+              <Dropdown
+                dropdownItems={["Slow", "Normal", "Fast"]}
+                default={"Normal"}
+              />
+            </div>
           </div>
           <div className="tools">
-            <img src={play} alt="start icon" className="action-icon" />
-            <img src={reset} alt="reset grid icon" className="action-icon" />
-            <img src={wall} alt="build wall icon" className="action-icon" />
-            <img src={bin} alt="delete wall icon" className="action-icon" />
-            <img src={flag} alt="Start end icon" className="action-icon" />
+            <div className="sub-tools">
+              <h3 className="nav-label">Start/Reset</h3>
+              <img src={play} alt="start icon" className="action-icon" />
+              <img src={reset} alt="reset grid icon" className="action-icon" />
+            </div>
+            <div className="sub-tools">
+              <h3 className="nav-label">Edit Tools</h3>
+              <img src={wall} alt="build wall icon" className="action-icon" />
+              <img src={bin} alt="delete wall icon" className="action-icon" />
+              <img src={flag} alt="Start end icon" className="action-icon" />
+            </div>
           </div>
         </div>
       </nav>
