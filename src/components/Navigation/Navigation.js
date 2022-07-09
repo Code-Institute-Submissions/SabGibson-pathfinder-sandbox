@@ -9,6 +9,8 @@ import play from "../images/play.svg";
 import reset from "../images/reset.svg";
 import logo from "../images/big-logo-text.svg";
 
+import Dropdown from "./Dropdown";
+
 const Navigation = () => {
   return (
     <div className="nav-comp">
@@ -18,18 +20,15 @@ const Navigation = () => {
         </div>
         <div className="tool-pane">
           <div className="algo-tools">
-            <div className="dropdown">
-              <div className="select">
-                <span className="selected">Please Select an algorithm</span>
-                <div className="arrow"></div>
-              </div>
-              <ul className="algo-list">
-                <li>Algo 1</li>
-                <li>Algo 2</li>
-                <li>Algo 3</li>
-                <li>Algo 4</li>
-              </ul>
-            </div>
+            <Dropdown
+              dropdownItems={[
+                "Bredth First Search",
+                "Depth First Search",
+                "A* Search Algorith",
+                "Dijkstra's Search Algorithm",
+              ]}
+            />
+            <Dropdown dropdownItems={["Slow", "Normal", "Fast"]} />
           </div>
           <div className="tools">
             <img src={play} alt="start icon" className="action-icon" />
