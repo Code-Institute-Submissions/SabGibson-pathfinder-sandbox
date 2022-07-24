@@ -5,37 +5,79 @@ const Node = (props) => {
   // extract props
   const params = props.node;
   const [isStart, setIsStart] = useState(params.isStart);
-  const isEnd = params.isEnd;
-  const isWall = params.isWall;
+  const [isEnd, setIsEnd] = useState(params.isEnd);
+  const [isWall, setIsWall] = useState(params.isWall);
   const isVisited = params.isVisited;
   const xVal = params.xVal;
   const yVal = params.yVal;
-  const setStartTermialNodes = props.setStartTermialNodes;
   const startNode = props.startNode;
+  const endNode = props.endNode;
+  const setMouseIsPressed = props.setMouseIsPressed;
+  const mouseIsPressed = props.mouseIsPressed;
+  const activeTool = props.activeTool;
+  const setActiveTool = props.setActiveTool;
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
   const wallClass = isWall ? "wall" : "";
   const visitedClass = isVisited ? "visited" : "";
 
-  // Effect hook for updating grid post init
+  // Effect hooks for updating grid post init
+
+  // Use effect is used to update node components
   useEffect(() => {
-    reloadNode();
+    startReloadNode();
   }, [startNode]);
+
+  useEffect(() => {
+    endReloadNode();
+  }, [endNode]);
 
   //Define on node interaction methods
 
-  const reloadNode = () => {
-    setIsStart(startNode == `id-${xVal}-${yVal}`);
-    console.log(`changed value ${xVal}-${yVal}`);
-    console.log(startNode);
+  // startReloadNode sets node isStart state in useEffect hook
+  const startReloadNode = () => {
+    setIsStart(startNode === `id-${xVal}-${yVal}`);
+  };
+  // endReloadNode sets node isEnd state in useEffect hook
+  const endReloadNode = () => {
+    setIsEnd(endNode === `id-${xVal}-${yVal}`);
   };
 
-  const onMouseClick = () => {};
+  const placeDeleteWallStart = () => {
+    if (activeTool === "make-wall-button") {
+      setIsWall(true);
+      setMouseIsPressed(true);
+    } else if (activeTool === "delete-wall-button") {
+      setIsWall(false);
+      setMouseIsPressed(true);
+    }
+  };
 
-  const onMouseEnter = (e) => {};
+  const placeDeleteWallOnEnter = () => {
+    if (mouseIsPressed && activeTool === "make-wall-button") {
+      setIsWall(true);
+    } else if (mouseIsPressed && activeTool === "delete-wall-button") {
+      setIsWall(false);
+    }
+  };
 
-  const onMouseUp = (e) => {};
+  const endDrag = () => {
+    setActiveTool(null);
+    setMouseIsPressed(false);
+  };
+
+  const onMouseDown = () => {
+    placeDeleteWallStart();
+  };
+
+  const onMouseEnter = (e) => {
+    placeDeleteWallOnEnter();
+  };
+
+  const onMouseUp = (e) => {
+    endDrag();
+  };
 
   const ondblClick = () => {};
 
@@ -43,8 +85,10 @@ const Node = (props) => {
   return (
     <div
       className={`node ${terminalClass} ${wallClass} ${visitedClass}`}
+      onMouseDown={onMouseDown}
+      onMouseEnter={onMouseEnter}
+      onMouseUp={onMouseUp}
       id={`id-${xVal}-${yVal}`}
-      onClick={onMouseClick}
     ></div>
   );
 };

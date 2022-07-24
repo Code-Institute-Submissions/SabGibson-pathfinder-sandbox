@@ -13,7 +13,7 @@ const Pathfinder = (props) => {
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
   const [startNode, setStartNode] = useState("id-0-0");
-  const [endNode, setEndNode] = useState(null);
+  const [endNode, setEndNode] = useState("id-49-19");
 
   // unload state varivabels form props
   const activeTool = props.activeTool;
@@ -24,7 +24,7 @@ const Pathfinder = (props) => {
     this.xVal = col;
     this.yVal = row;
     this.isStart = startNode === `id-${col}-${row}`;
-    this.isEnd = false;
+    this.isEnd = endNode === `id-${col}-${row}`;
     this.isWall = false;
     this.isVisited = false;
   }
@@ -50,15 +50,26 @@ const Pathfinder = (props) => {
 
   // Pathfinder methods for interaction with grid
 
-  const setStartTermialNodes = (e) => {
-    setStartNode(e.target.id);
+  //setTermialNodes function allows users to set start and end node
+  // Dbl click to place start node and single click to place end node after flag
+  let terminalType = true;
+  const setTermialNodes = (e) => {
+    if (activeTool === "place-start-end-button") {
+      if (terminalType === true) {
+        setStartNode(e.target.id);
+      } else {
+        setEndNode(e.target.id);
+        setActiveTool(null);
+      }
+      terminalType = !terminalType;
+    }
   };
 
-  // function and variable to set termial nodes
-
+  // variable to modify componant class based on activeTool status
+  const activetoolClassMod = activeTool ? "active-tool" : "";
   // Define return variable for the Pathfinder using Node component
   const functionalGrid = (
-    <div className="sb-grid" onClick={setStartTermialNodes}>
+    <div className={`sb-grid ${activetoolClassMod}`} onClick={setTermialNodes}>
       {activeGrid.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
@@ -71,7 +82,8 @@ const Pathfinder = (props) => {
                   endNode={endNode}
                   activeTool={activeTool}
                   setActiveTool={setActiveTool}
-                  setStartTermialNodes={setStartTermialNodes}
+                  mouseIsPressed={mouseIsPressed}
+                  setMouseIsPressed={setMouseIsPressed}
                 />
               );
             })}
