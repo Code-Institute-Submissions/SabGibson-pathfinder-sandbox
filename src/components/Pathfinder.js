@@ -7,19 +7,29 @@ import Node from "./Node/Node";
 const rows = 20;
 const cols = 50;
 
-// node object constructor
-function newNode(col, row) {
-  this.xVal = col;
-  this.yVal = row;
-  this.isStart = false;
-  this.isEnd = false;
-  this.isWall = false;
-  this.isVisited = false;
-}
-
 // Pathfinder state functionless component that will be main interface for app
-const Pathfinder = () => {
-  // gridInit() function creates 2D array and populates with nodes
+const Pathfinder = (props) => {
+  // Define React state hooks for grid and mouse input
+  const [activeGrid, setActiveGrid] = useState([]);
+  const [mouseIsPressed, setMouseIsPressed] = useState([]);
+  const [startNode, setStartNode] = useState("id-0-0");
+  const [endNode, setEndNode] = useState(null);
+
+  // unload state varivabels form props
+  const activeTool = props.activeTool;
+  const setActiveTool = props.setActiveTool;
+
+  // node object constructor
+  function newNode(col, row) {
+    this.xVal = col;
+    this.yVal = row;
+    this.isStart = startNode === `id-${col}-${row}`;
+    this.isEnd = false;
+    this.isWall = false;
+    this.isVisited = false;
+  }
+
+  // gridInit() function creates 2D array and populates with node objects
   const gridInit = () => {
     const grid = [];
     for (let i = 0; i < cols; i++) {
@@ -33,88 +43,22 @@ const Pathfinder = () => {
     setActiveGrid(grid);
   };
 
-  // Define React state hooks for grid and mouse input
-  const [activeGrid, setActiveGrid] = useState([]);
-  const [mouseIsPressed, setMouseIsPressed] = useState([]);
-  const [startNode, setStartNode] = useState(null);
-  const [endNode, setEndNode] = useState(null);
-
-  // Define effect hook of init of Pathfinder (gird) component
+  // Effect hook for init of Pathfinder (gird) component
   useEffect(() => {
     gridInit();
   }, []);
 
   // Pathfinder methods for interaction with grid
 
-  // makeWallStart - function for starting new wall nodes
-  const makeWallStart = (node) => {
-    const newGrid = activeGrid.slice();
-    if (node.isWall === false) {
-      node.isWall = true;
-      newGrid[node.xVal][node.yVal] = node;
-      setActiveGrid(newGrid);
-      setMouseIsPressed(true);
-    }
+  const setStartTermialNodes = (e) => {
+    setStartNode(e.target.id);
   };
 
-  const makeWallConti = (node) => {
-    const newGrid = activeGrid.slice();
-    if (mouseIsPressed && node.isWall === false) {
-      node.isWall = true;
-      newGrid[node.xVal][node.yVal] = node;
-      setActiveGrid(newGrid);
-    }
-  };
-
-  const delWallStart = (node) => {
-    const newGrid = activeGrid.slice();
-    node.isWall = false;
-    newGrid[node.xVal][node.yVal] = node;
-    setActiveGrid(newGrid);
-    setMouseIsPressed(true);
-  };
-
-  const deleWallConti = (node) => {
-    const newGrid = activeGrid.slice();
-    if (mouseIsPressed) {
-      node.isWall = false;
-      newGrid[node.xVal][node.yVal] = node;
-      setActiveGrid(newGrid);
-    }
-  };
-
-  const editEnd = () => {
-    setMouseIsPressed(false);
-  };
-
-  const startEndSelector = (node) => {
-    if (startNode == null && endNode == null) {
-      node.isStart = true;
-      node.isWall = false;
-      setStartNode(node);
-    } else if (endNode == null) {
-      node.isEnd = true;
-      node.isWall = false;
-      setEndNode(node);
-    } else if (startNode && endNode) {
-      node.isStart = false;
-      node.isWall = false;
-      setStartNode(null);
-    } else {
-      node.isEnd = false;
-      node.isWall = false;
-      setEndNode(null);
-    }
-
-    const newGrid = activeGrid.slice();
-    newGrid[node.xVal][node.yVal] = node;
-
-    setActiveGrid(newGrid);
-  };
+  // function and variable to set termial nodes
 
   // Define return variable for the Pathfinder using Node component
   const functionalGrid = (
-    <div className="sb-grid">
+    <div className="sb-grid" onClick={setStartTermialNodes}>
       {activeGrid.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
@@ -123,12 +67,11 @@ const Pathfinder = () => {
                 <Node
                   key={nodeIndex}
                   node={node}
-                  makeWallStart={makeWallStart}
-                  makeWallConti={makeWallConti}
-                  delWallStart={delWallStart}
-                  deleWallConti={deleWallConti}
-                  editEnd={editEnd}
-                  startEndSelector={startEndSelector}
+                  startNode={startNode}
+                  endNode={endNode}
+                  activeTool={activeTool}
+                  setActiveTool={setActiveTool}
+                  setStartTermialNodes={setStartTermialNodes}
                 />
               );
             })}

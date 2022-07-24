@@ -1,7 +1,7 @@
 // Import external componants
 import "./Navigation.css";
 
-// Import  imgae componants
+// Import  image componants
 import wall from "../images/wall.svg";
 import bin from "../images/bin.svg";
 import flag from "../images/flag.svg";
@@ -9,9 +9,10 @@ import play from "../images/play.svg";
 import reset from "../images/reset.svg";
 import logo from "../images/big-logo-text.svg";
 
+// import other react componants
 import Dropdown from "./Dropdown";
 
-const Navigation = () => {
+const Navigation = ({ selectTool }) => {
   return (
     <div className="nav-comp">
       <nav className="nav-bar">
@@ -40,17 +41,42 @@ const Navigation = () => {
               />
             </div>
           </div>
-          <div className="tools">
+          <div className="tools" onClick={selectTool}>
             <div className="sub-tools">
               <h3 className="nav-label">Start/Reset</h3>
-              <img src={play} alt="start icon" className="action-icon" />
-              <img src={reset} alt="reset grid icon" className="action-icon" />
+              <img
+                src={play}
+                alt="start icon"
+                className="action-icon"
+                id="play-button"
+              />
+              <img
+                src={reset}
+                alt="reset grid icon"
+                className="action-icon"
+                id="reset-all-button"
+              />
             </div>
             <div className="sub-tools">
               <h3 className="nav-label">Edit Tools</h3>
-              <img src={wall} alt="build wall icon" className="action-icon" />
-              <img src={bin} alt="delete wall icon" className="action-icon" />
-              <img src={flag} alt="Start end icon" className="action-icon" />
+              <img
+                src={wall}
+                alt="build wall icon"
+                className="action-icon"
+                id="make-wall-button"
+              />
+              <img
+                src={bin}
+                alt="delete wall icon"
+                className="action-icon"
+                id="delete-wall-button"
+              />
+              <img
+                src={flag}
+                alt="Start end icon"
+                className="action-icon"
+                id="place-start-end-button"
+              />
             </div>
           </div>
         </div>

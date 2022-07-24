@@ -1,61 +1,50 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import "./Node.css";
 const Node = (props) => {
-  // Parameters from prop variable
+  // extract props
   const params = props.node;
-  const isStart = params.isStart;
+  const [isStart, setIsStart] = useState(params.isStart);
   const isEnd = params.isEnd;
   const isWall = params.isWall;
   const isVisited = params.isVisited;
   const xVal = params.xVal;
   const yVal = params.yVal;
-
-  // unload methods
-  const makeWallStart = props.makeWallStart;
-  const makeWallConti = props.makeWallConti;
-  const delWallStart = props.delWallStart;
-  const deleWallConti = props.deleWallConti;
-  const editEnd = props.editEnd;
-  const startEndSelector = props.startEndSelector;
+  const setStartTermialNodes = props.setStartTermialNodes;
+  const startNode = props.startNode;
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
   const wallClass = isWall ? "wall" : "";
   const visitedClass = isVisited ? "visited" : "";
 
-  // Define node methods for interaction with grid
-  const onMouseDown = (e) => {
-    if (e.altKey) {
-      delWallStart(params);
-    } else {
-      makeWallStart(params);
-    }
+  // Effect hook for updating grid post init
+  useEffect(() => {
+    reloadNode();
+  }, [startNode]);
+
+  //Define on node interaction methods
+
+  const reloadNode = () => {
+    setIsStart(startNode == `id-${xVal}-${yVal}`);
+    console.log(`changed value ${xVal}-${yVal}`);
+    console.log(startNode);
   };
 
-  const onMouseEnter = (e) => {
-    if (e.altKey) {
-      deleWallConti(params);
-    } else {
-      makeWallConti(params);
-    }
-  };
+  const onMouseClick = () => {};
 
-  const onMouseUp = (e) => {
-    editEnd(params);
-  };
+  const onMouseEnter = (e) => {};
 
-  const ondblClick = () => {
-    startEndSelector(params);
-  };
+  const onMouseUp = (e) => {};
+
+  const ondblClick = () => {};
 
   // Return Jsx node component
   return (
     <div
       className={`node ${terminalClass} ${wallClass} ${visitedClass}`}
       id={`id-${xVal}-${yVal}`}
-      onMouseDown={onMouseDown}
-      onMouseEnter={onMouseEnter}
-      onMouseUp={onMouseUp}
-      onClick={ondblClick}
+      onClick={onMouseClick}
     ></div>
   );
 };
