@@ -15,7 +15,8 @@ const Node = (props) => {
   const setMouseIsPressed = props.setMouseIsPressed;
   const mouseIsPressed = props.mouseIsPressed;
   const activeTool = props.activeTool;
-  const setActiveTool = props.setActiveTool;
+  const clearToolSelection = props.clearToolSelection;
+  const endDrag = props.endDrag;
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
@@ -62,11 +63,6 @@ const Node = (props) => {
     }
   };
 
-  const endDrag = () => {
-    setActiveTool(null);
-    setMouseIsPressed(false);
-  };
-
   const onMouseDown = () => {
     placeDeleteWallStart();
   };
@@ -76,7 +72,11 @@ const Node = (props) => {
   };
 
   const onMouseUp = (e) => {
-    endDrag();
+    if (mouseIsPressed && activeTool === "make-wall-button") {
+      endDrag();
+    } else if (mouseIsPressed && activeTool === "delete-wall-button") {
+      endDrag();
+    }
   };
 
   const ondblClick = () => {};

@@ -18,6 +18,7 @@ const Pathfinder = (props) => {
   // unload state varivabels form props
   const activeTool = props.activeTool;
   const setActiveTool = props.setActiveTool;
+  const clearToolSelection = props.clearToolSelection;
 
   // node object constructor
   function newNode(col, row) {
@@ -46,23 +47,28 @@ const Pathfinder = (props) => {
   // Effect hook for init of Pathfinder (gird) component
   useEffect(() => {
     gridInit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Pathfinder methods for interaction with grid
 
   //setTermialNodes function allows users to set start and end node
-  // Dbl click to place start node and single click to place end node after flag
   let terminalType = true;
   const setTermialNodes = (e) => {
     if (activeTool === "place-start-end-button") {
-      if (terminalType === true) {
+      if (terminalType) {
         setStartNode(e.target.id);
       } else {
         setEndNode(e.target.id);
-        setActiveTool(null);
+        clearToolSelection();
       }
       terminalType = !terminalType;
     }
+  };
+
+  const endDrag = () => {
+    clearToolSelection();
+    setMouseIsPressed(false);
   };
 
   // variable to modify componant class based on activeTool status
@@ -84,6 +90,8 @@ const Pathfinder = (props) => {
                   setActiveTool={setActiveTool}
                   mouseIsPressed={mouseIsPressed}
                   setMouseIsPressed={setMouseIsPressed}
+                  clearToolSelection={clearToolSelection}
+                  endDrag={endDrag}
                 />
               );
             })}
