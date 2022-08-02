@@ -1,22 +1,20 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import "./Node.css";
-const Node = (props) => {
-  // extract props
-  const params = props.node;
-  const [isStart, setIsStart] = useState(params.isStart);
-  const [isEnd, setIsEnd] = useState(params.isEnd);
-  const [isWall, setIsWall] = useState(params.isWall);
-  const isVisited = params.isVisited;
-  const xVal = params.xVal;
-  const yVal = params.yVal;
-  const startNode = props.startNode;
-  const endNode = props.endNode;
-  const setMouseIsPressed = props.setMouseIsPressed;
-  const mouseIsPressed = props.mouseIsPressed;
-  const activeTool = props.activeTool;
-  const clearToolSelection = props.clearToolSelection;
-  const endDrag = props.endDrag;
+const Node = ({
+  node,
+  startNode,
+  endNode,
+  activeTool,
+  mouseIsPressed,
+  setMouseIsPressed,
+  endDrag,
+}) => {
+  // Define states
+  const [isStart, setIsStart] = useState(node.isStart);
+  const [isEnd, setIsEnd] = useState(node.isEnd);
+  const [isWall, setIsWall] = useState(node.isWall);
+  const [isVisited, setIsVisited] = useState(node.isVisited);
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
@@ -38,11 +36,11 @@ const Node = (props) => {
 
   // startReloadNode sets node isStart state in useEffect hook
   const startReloadNode = () => {
-    setIsStart(startNode === `id-${xVal}-${yVal}`);
+    setIsStart(startNode === node);
   };
   // endReloadNode sets node isEnd state in useEffect hook
   const endReloadNode = () => {
-    setIsEnd(endNode === `id-${xVal}-${yVal}`);
+    setIsEnd(endNode === node);
   };
 
   const placeDeleteWallStart = () => {
@@ -55,7 +53,7 @@ const Node = (props) => {
     }
   };
 
-  const placeDeleteWallOnEnter = () => {
+  const placeDeleteWallOnEnter = (e) => {
     if (mouseIsPressed && activeTool === "make-wall-button") {
       setIsWall(true);
     } else if (mouseIsPressed && activeTool === "delete-wall-button") {
@@ -79,8 +77,6 @@ const Node = (props) => {
     }
   };
 
-  const ondblClick = () => {};
-
   // Return Jsx node component
   return (
     <div
@@ -88,7 +84,7 @@ const Node = (props) => {
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
       onMouseUp={onMouseUp}
-      id={`id-${xVal}-${yVal}`}
+      id={`id-${node.xVal}-${node.yVal}`}
     ></div>
   );
 };

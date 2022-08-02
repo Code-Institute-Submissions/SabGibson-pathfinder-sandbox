@@ -12,8 +12,8 @@ const Pathfinder = (props) => {
   // Define React state hooks for grid and mouse input
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
-  const [startNode, setStartNode] = useState("id-0-0");
-  const [endNode, setEndNode] = useState("id-49-19");
+  const [startNode, setStartNode] = useState();
+  const [endNode, setEndNode] = useState();
 
   // unload state varivabels form props
   const activeTool = props.activeTool;
@@ -21,13 +21,14 @@ const Pathfinder = (props) => {
   const clearToolSelection = props.clearToolSelection;
 
   // node object constructor
-  function newNode(col, row) {
+  function nodeObject(col, row) {
     this.xVal = col;
     this.yVal = row;
     this.isStart = startNode === `id-${col}-${row}`;
     this.isEnd = endNode === `id-${col}-${row}`;
     this.isWall = false;
     this.isVisited = false;
+    this.neighbours = [];
   }
 
   // gridInit() function creates 2D array and populates with node objects
@@ -36,7 +37,7 @@ const Pathfinder = (props) => {
     for (let i = 0; i < cols; i++) {
       const currentRow = [];
       for (let j = 0; j < rows; j++) {
-        currentRow.push(new newNode(i, j));
+        currentRow.push(new nodeObject(i, j));
       }
       grid.push(currentRow);
     }
@@ -47,7 +48,6 @@ const Pathfinder = (props) => {
   // Effect hook for init of Pathfinder (gird) component
   useEffect(() => {
     gridInit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Pathfinder methods for interaction with grid
@@ -55,15 +55,19 @@ const Pathfinder = (props) => {
   //setTermialNodes function allows users to set start and end node
   let terminalType = true;
   const setTermialNodes = (e) => {
-    if (activeTool === "place-start-end-button") {
-      if (terminalType) {
-        setStartNode(e.target.id);
-      } else {
-        setEndNode(e.target.id);
-        clearToolSelection();
-      }
-      terminalType = !terminalType;
+    const nodeCoords = e.target.id.split("-");
+    const newGrid = activeGrid.slice();
+    const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
+
+    if (activeTool === "place-start-end-button" && terminalType) {
+      targetNode.isStart = true;
+      setStartNode(targetNode);
+    } else if (activeTool === "place-start-end-button") {
+      targetNode.isEnd = true;
+      setEndNode(targetNode);
+      clearToolSelection();
     }
+    terminalType = !terminalType;
   };
 
   const endDrag = () => {
@@ -90,7 +94,6 @@ const Pathfinder = (props) => {
                   setActiveTool={setActiveTool}
                   mouseIsPressed={mouseIsPressed}
                   setMouseIsPressed={setMouseIsPressed}
-                  clearToolSelection={clearToolSelection}
                   endDrag={endDrag}
                 />
               );

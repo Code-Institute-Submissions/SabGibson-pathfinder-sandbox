@@ -2,7 +2,6 @@ import "./App.css";
 import Pathfinder from "./components/Pathfinder";
 import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   // Define UI states
