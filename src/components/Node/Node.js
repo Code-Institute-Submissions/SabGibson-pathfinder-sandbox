@@ -36,7 +36,8 @@ const Node = ({
     // endReloadNode sets node isEnd state in useEffect hook
 
     const endReloadNode = () => {
-      setIsEnd(endNode === node);
+      const state = endNode === node;
+      setIsEnd(state);
     };
     endReloadNode();
   }, [endNode, node]);
@@ -45,7 +46,6 @@ const Node = ({
 
   const placeDeleteWallStart = () => {
     if (activeTool === "make-wall-button") {
-      // console.log(node);
       node.isWall = true;
     } else if (activeTool === "delete-wall-button") {
       node.isWall = false;
@@ -56,14 +56,19 @@ const Node = ({
 
   const placeDeleteWallOnEnter = (e) => {
     if (mouseIsPressed && activeTool === "make-wall-button") {
-      setIsWall(true);
+      node.isWall = true;
     } else if (mouseIsPressed && activeTool === "delete-wall-button") {
-      setIsWall(false);
+      node.isWall = false;
     }
+    setIsWall(node.isWall);
   };
 
-  const onMouseDown = () => {
-    placeDeleteWallStart();
+  const onMouseDown = (e) => {
+    if (e.altKey) {
+      console.log(node);
+    } else {
+      placeDeleteWallStart();
+    }
   };
 
   const onMouseEnter = (e) => {

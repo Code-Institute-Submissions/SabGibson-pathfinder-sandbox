@@ -1,36 +1,24 @@
-import { rows, cols } from "./components/Pathfinder";
-
-// breadth first algo returns list of nodes in path to target if possible
-const breadthFirst = (start, target, grid) => {
-  const rows = grid.length;
-  const cols = grid[0].length;
+export const breadthFirst = function (start, target) {
   const queue = [start];
   const path = [];
 
-  while (queue) {
-    currNode = queue.shift();
+  while (queue.length > 0) {
+    const currNode = queue.shift();
+    if (currNode.isVisited) {
+      continue;
+    }
 
     if (currNode === target) {
-      path.append(currNode);
       return path;
+    }
+    currNode.isVisited = true;
+    path.push(currNode);
+    for (const neighbour of currNode.neighbours) {
+      if (!neighbour.isVisited && !(neighbour in queue)) {
+        queue.push(neighbour);
+      }
     }
   }
 
   return path;
 };
-
-const gridInit = () => {
-  const grid = [];
-  for (let i = 0; i < cols; i++) {
-    const currentRow = [];
-    for (let j = 0; j < rows; j++) {
-      currentRow.push(new nodeObject(i, j));
-    }
-    grid.push(currentRow);
-  }
-  console.log(grid);
-  setMouseIsPressed(false);
-  setActiveGrid(grid);
-};
-
-gridInit();

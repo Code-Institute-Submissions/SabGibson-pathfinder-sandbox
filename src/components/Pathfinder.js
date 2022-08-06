@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import "./Pathfinder.css";
 import Node from "./Node/Node";
-
+import { breadthFirst } from "../Algorithms/breadthFirstSearch.js";
 // variables that define grid size
 const rows = 20;
 const cols = 50;
@@ -12,13 +12,15 @@ const Pathfinder = (props) => {
   // Define React state hooks for grid and mouse input
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
-  const [startNode, setStartNode] = useState();
-  const [endNode, setEndNode] = useState();
 
   // unload state varivabels form props
   const activeTool = props.activeTool;
   const setActiveTool = props.setActiveTool;
   const clearToolSelection = props.clearToolSelection;
+  const startNode = props.startNode;
+  const setStartNode = props.setStartNode;
+  const endNode = props.endNode;
+  const setEndNode = props.setEndNode;
 
   // Effect hook for init of Pathfinder (gird) component
 
@@ -82,6 +84,11 @@ const Pathfinder = (props) => {
 
   // Pathfinder methods for interaction with grid
 
+  const test = () => {
+    console.log(breadthFirst(startNode, endNode));
+    console.log(startNode, endNode);
+  };
+
   //setTermialNodes function allows users to set start and end node
   let terminalType = true;
   const setTermialNodes = (e) => {
@@ -89,6 +96,10 @@ const Pathfinder = (props) => {
       const nodeCoords = e.target.id.split("-");
       const newGrid = activeGrid.slice();
       const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
+      // set prev start node to false
+      if (startNode) {
+        newGrid[startNode.xVal][startNode.yVal].isStart = false;
+      }
 
       targetNode.isStart = true;
       setStartNode(targetNode);
@@ -99,9 +110,13 @@ const Pathfinder = (props) => {
       const nodeCoords = e.target.id.split("-");
       const newGrid = activeGrid.slice();
       const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
-
+      // set prev end node to false
+      if (endNode) {
+        newGrid[endNode.xVal][endNode.yVal].isEnd = false;
+      }
       targetNode.isEnd = true;
       setEndNode(targetNode);
+      setMouseIsPressed(false);
       clearToolSelection();
     }
     terminalType = !terminalType;
@@ -116,7 +131,11 @@ const Pathfinder = (props) => {
   const activetoolClassMod = activeTool ? "active-tool" : "";
   // Define return variable for the Pathfinder using Node component
   const functionalGrid = (
-    <div className={`sb-grid ${activetoolClassMod}`} onClick={setTermialNodes}>
+    <div
+      className={`sb-grid ${activetoolClassMod}`}
+      onClick={setTermialNodes}
+      onDoubleClick={test}
+    >
       {activeGrid.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
