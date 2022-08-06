@@ -26,12 +26,15 @@ const Node = ({
   // Use effect is used to update node components
   useEffect(() => {
     const startReloadNode = () => {
+      // startReloadNode sets node isStart state in useEffect hook
       setIsStart(startNode === node);
     };
     startReloadNode();
   }, [startNode, node]);
 
   useEffect(() => {
+    // endReloadNode sets node isEnd state in useEffect hook
+
     const endReloadNode = () => {
       setIsEnd(endNode === node);
     };
@@ -40,19 +43,15 @@ const Node = ({
 
   //Define on node interaction methods
 
-  // startReloadNode sets node isStart state in useEffect hook
-
-  // endReloadNode sets node isEnd state in useEffect hook
-
   const placeDeleteWallStart = () => {
     if (activeTool === "make-wall-button") {
-      console.log(node);
-      setIsWall(true);
-      setMouseIsPressed(true);
+      // console.log(node);
+      node.isWall = true;
     } else if (activeTool === "delete-wall-button") {
-      setIsWall(false);
-      setMouseIsPressed(true);
+      node.isWall = false;
     }
+    setIsWall(node.isWall);
+    setMouseIsPressed(true);
   };
 
   const placeDeleteWallOnEnter = (e) => {

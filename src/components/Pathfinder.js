@@ -46,10 +46,10 @@ const Pathfinder = (props) => {
           this.neighbours.push(grid[i][j - 1]);
         }
         if (i + 1 < rows) {
-          this.neighbours.push(grid[i][j]);
+          this.neighbours.push(grid[i + 1][j]);
         }
         if (j + 1 < cols) {
-          this.neighbours.push(grid[i][j]);
+          this.neighbours.push(grid[i][j + 1]);
         }
       };
     }
@@ -76,8 +76,8 @@ const Pathfinder = (props) => {
 
     const startGrid = gridInit();
     addNodeNeighbours(startGrid);
+    setMouseIsPressed(false);
     setActiveGrid(startGrid);
-    console.log(startGrid);
   }, []);
 
   // Pathfinder methods for interaction with grid
@@ -85,14 +85,21 @@ const Pathfinder = (props) => {
   //setTermialNodes function allows users to set start and end node
   let terminalType = true;
   const setTermialNodes = (e) => {
-    const nodeCoords = e.target.id.split("-");
-    const newGrid = activeGrid.slice();
-    const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
-
     if (activeTool === "place-start-end-button" && terminalType) {
+      const nodeCoords = e.target.id.split("-");
+      const newGrid = activeGrid.slice();
+      const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
+
       targetNode.isStart = true;
       setStartNode(targetNode);
-    } else if (activeTool === "place-start-end-button") {
+    } else if (
+      activeTool === "place-start-end-button" &&
+      terminalType === false
+    ) {
+      const nodeCoords = e.target.id.split("-");
+      const newGrid = activeGrid.slice();
+      const targetNode = newGrid[nodeCoords[1]][nodeCoords[2]];
+
       targetNode.isEnd = true;
       setEndNode(targetNode);
       clearToolSelection();
