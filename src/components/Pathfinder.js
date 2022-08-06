@@ -20,12 +20,10 @@ const Pathfinder = (props) => {
   const setActiveTool = props.setActiveTool;
   const clearToolSelection = props.clearToolSelection;
 
-  // node object constructor
-
-  // gridInit() function creates 2D array and populates with node objects
-
   // Effect hook for init of Pathfinder (gird) component
+
   useEffect(() => {
+    // node object constructor
     function nodeObject(col, row) {
       this.xVal = col;
       this.yVal = row;
@@ -34,9 +32,28 @@ const Pathfinder = (props) => {
       this.isWall = false;
       this.isVisited = false;
       this.neighbours = [];
-      this.addNeighbours = (grid) => {};
-    }
+      this.addNeighbours = (grid) => {
+        let i = this.xVal;
+        let j = this.yVal;
 
+        const rows = grid.length;
+        const cols = grid[0].length;
+
+        if (0 < i) {
+          this.neighbours.push(grid[i - 1][j]);
+        }
+        if (0 < j) {
+          this.neighbours.push(grid[i][j - 1]);
+        }
+        if (i + 1 < rows) {
+          this.neighbours.push(grid[i][j]);
+        }
+        if (j + 1 < cols) {
+          this.neighbours.push(grid[i][j]);
+        }
+      };
+    }
+    // gridInit() function creates 2D array and populates with node objects
     const gridInit = () => {
       const grid = [];
       for (let i = 0; i < cols; i++) {
@@ -46,11 +63,21 @@ const Pathfinder = (props) => {
         }
         grid.push(currentRow);
       }
-      setMouseIsPressed(false);
-      setActiveGrid(grid);
+      return grid;
     };
 
-    gridInit();
+    const addNodeNeighbours = (grid) => {
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          grid[i][j].addNeighbours(grid);
+        }
+      }
+    };
+
+    const startGrid = gridInit();
+    addNodeNeighbours(startGrid);
+    setActiveGrid(startGrid);
+    console.log(startGrid);
   }, []);
 
   // Pathfinder methods for interaction with grid
