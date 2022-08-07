@@ -43,10 +43,6 @@
   transition: ease 0.2s;
 }
 
-/* .action-icon:hover {
-  transform: rotateZ(7deg);
-} */
-
 .select {
   cursor: pointer;
   border: 1px solid #6ff7f4;
@@ -99,12 +95,6 @@
   justify-content: flex-start;
   align-items: center;
 }
-
-/* .algo-list > li:hover {
-  width: 90%;
-  background: #fff;
-  border-radius: 10px;
-} */
 
 .algo-list.true {
   display: block;

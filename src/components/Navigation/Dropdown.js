@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Dropdown = (props) => {
   //Defiene componant states
@@ -29,7 +30,14 @@ const Dropdown = (props) => {
       </div>
       <ul className={`algo-list ${openStatus}`} onClick={selectDropdownItem}>
         {dropdownContents.map((item, index) => {
-          return <li key={index}>{item}</li>;
+          return (
+            <motion.li
+              key={index}
+              whileHover={{ scale: 1.2, color: "#fff", originX: 0 }}
+            >
+              {item}{" "}
+            </motion.li>
+          );
         })}
       </ul>
     </div>

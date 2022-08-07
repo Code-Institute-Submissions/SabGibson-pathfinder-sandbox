@@ -42,17 +42,20 @@ const Pathfinder = (props) => {
         const rows = grid.length;
         const cols = grid[0].length;
 
-        if (0 < i) {
-          this.neighbours.push(grid[i - 1][j]);
-        }
-        if (0 < j) {
-          this.neighbours.push(grid[i][j - 1]);
-        }
         if (i + 1 < rows) {
           this.neighbours.push(grid[i + 1][j]);
         }
+
         if (j + 1 < cols) {
           this.neighbours.push(grid[i][j + 1]);
+        }
+
+        if (0 < i) {
+          this.neighbours.push(grid[i - 1][j]);
+        }
+
+        if (0 < j) {
+          this.neighbours.push(grid[i][j - 1]);
         }
       };
     }
