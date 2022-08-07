@@ -43,9 +43,9 @@
   transition: ease 0.2s;
 }
 
-.action-icon:hover {
+/* .action-icon:hover {
   transform: rotateZ(7deg);
-}
+} */
 
 .select {
   cursor: pointer;
@@ -100,11 +100,11 @@
   align-items: center;
 }
 
-.algo-list > li:hover {
+/* .algo-list > li:hover {
   width: 90%;
   background: #fff;
   border-radius: 10px;
-}
+} */
 
 .algo-list.true {
   display: block;
