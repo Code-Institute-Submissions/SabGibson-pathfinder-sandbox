@@ -12,6 +12,7 @@ const Pathfinder = (props) => {
   // Define React state hooks for grid and mouse input
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
+  const [nodeToAnimate, setNodeToAnimate] = useState(null);
 
   // unload state varivabels form props
   const activeTool = props.activeTool;
@@ -84,9 +85,15 @@ const Pathfinder = (props) => {
 
   // Pathfinder methods for interaction with grid
 
-  const test = () => {
-    console.log(breadthFirst(startNode, endNode));
-    console.log(startNode, endNode);
+  const showPath = () => {
+    const visitedNodesInOrder = breadthFirst(startNode, endNode);
+
+    visitedNodesInOrder.forEach((node, index) => {
+      setTimeout(() => {
+        console.log(node);
+        setNodeToAnimate(node);
+      }, 100 * index);
+    });
   };
 
   //setTermialNodes function allows users to set start and end node
@@ -134,7 +141,7 @@ const Pathfinder = (props) => {
     <div
       className={`sb-grid ${activetoolClassMod}`}
       onClick={setTermialNodes}
-      onDoubleClick={test}
+      onDoubleClick={showPath}
     >
       {activeGrid.map((row, rowIndex) => {
         return (
@@ -151,6 +158,7 @@ const Pathfinder = (props) => {
                   mouseIsPressed={mouseIsPressed}
                   setMouseIsPressed={setMouseIsPressed}
                   endDrag={endDrag}
+                  nodeToAnimate={nodeToAnimate}
                 />
               );
             })}

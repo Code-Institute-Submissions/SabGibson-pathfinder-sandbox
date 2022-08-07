@@ -9,6 +9,7 @@ const Node = ({
   mouseIsPressed,
   setMouseIsPressed,
   endDrag,
+  nodeToAnimate,
 }) => {
   // Define states
   const [isStart, setIsStart] = useState(node.isStart);
@@ -42,6 +43,15 @@ const Node = ({
     endReloadNode();
   }, [endNode, node]);
 
+  useEffect(() => {
+    //visitReloadNode sets isVisited state in useEffect hook
+
+    const visitReloadNode = () => {
+      if (node === nodeToAnimate) setIsVisited(node.isVisited);
+    };
+
+    visitReloadNode();
+  }, [nodeToAnimate, node]);
   //Define on node interaction methods
 
   const placeDeleteWallStart = () => {
