@@ -1,11 +1,11 @@
-export const breadthFirst = function (start, target) {
+export const depthFirst = function (start, target) {
   start.isVisited = true;
   target.isVisited = true;
-  const queue = [start];
+  const stack = [start];
   const path = [];
 
-  while (queue.length > 0) {
-    const currNode = queue.shift();
+  while (stack.length > 0) {
+    const currNode = queue.pop();
     if (currNode.isVisited) {
       continue;
     }
