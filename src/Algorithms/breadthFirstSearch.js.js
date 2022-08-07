@@ -1,12 +1,10 @@
 export const breadthFirst = function (start, target) {
-  start.isVisited = true;
-  target.isVisited = true;
   const queue = [start];
   const path = [];
 
   while (queue.length > 0) {
     const currNode = queue.shift();
-    if (currNode.isVisited) {
+    if (currNode.isVisited || currNode.isWall) {
       continue;
     }
 
@@ -14,9 +12,9 @@ export const breadthFirst = function (start, target) {
       return path;
     }
     currNode.isVisited = true;
-    path.push(currNode);
+    if (!(currNode.isStart || currNode.isEnd)) path.push(currNode);
     for (const neighbour of currNode.neighbours) {
-      if (!neighbour.isVisited && !(neighbour in queue)) {
+      if (!neighbour.isVisited && !(neighbour in queue) && !neighbour.isWall) {
         queue.push(neighbour);
       }
     }

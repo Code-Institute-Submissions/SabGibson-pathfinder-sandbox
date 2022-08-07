@@ -1,12 +1,10 @@
 export const depthFirst = function (start, target) {
-  start.isVisited = true;
-  target.isVisited = true;
   const stack = [start];
   const path = [];
 
   while (stack.length > 0) {
-    const currNode = queue.pop();
-    if (currNode.isVisited) {
+    const currNode = stack.pop();
+    if (currNode.isVisited || currNode.isWall) {
       continue;
     }
 
@@ -14,9 +12,9 @@ export const depthFirst = function (start, target) {
       return path;
     }
     currNode.isVisited = true;
-    path.push(currNode);
+    if (!(currNode.isStart || currNode.isEnd)) path.push(currNode);
     for (const neighbour of currNode.neighbours) {
-      if (!neighbour.isVisited && !(neighbour in queue)) {
+      if (!neighbour.isVisited && !(neighbour in queue) && !neighbour.isWall) {
         queue.push(neighbour);
       }
     }
