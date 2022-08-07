@@ -93,7 +93,6 @@ const Pathfinder = (props) => {
 
     visitedNodesInOrder.forEach((node, index) => {
       setTimeout(() => {
-        console.log(node);
         setNodeToAnimate(node);
       }, 100 * index);
     });

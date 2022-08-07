@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import "./Node.css";
+import { motion, useCycle } from "framer-motion";
 const Node = ({
   node,
   startNode,
@@ -21,6 +22,20 @@ const Node = ({
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
   const wallClass = isWall ? "wall" : "";
   const visitedClass = isVisited ? "visited" : "";
+
+  // Define animation variants
+  const animationVariants = {
+    init: {},
+
+    active: {
+      scale: 1,
+      rotate: 90,
+      transition: { duration: 0.1 },
+    },
+  };
+
+  //Define useCycle
+  const [animation, cycleAnimation] = useCycle("init", "active");
 
   // Effect hooks for updating grid post init
 
@@ -47,7 +62,10 @@ const Node = ({
     //visitReloadNode sets isVisited state in useEffect hook
 
     const visitReloadNode = () => {
-      if (node === nodeToAnimate) setIsVisited(node.isVisited);
+      if (node === nodeToAnimate) {
+        setIsVisited(node.isVisited);
+        cycleAnimation();
+      }
     };
 
     visitReloadNode();
@@ -95,13 +113,15 @@ const Node = ({
 
   // Return Jsx node component
   return (
-    <div
+    <motion.div
       className={`node ${terminalClass} ${wallClass} ${visitedClass}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
       onMouseUp={onMouseUp}
       id={`id-${node.xVal}-${node.yVal}`}
-    ></div>
+      variants={animationVariants}
+      animate={animation}
+    ></motion.div>
   );
 };
 

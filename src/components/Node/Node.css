@@ -1,19 +1,20 @@
 .node {
-  width: 20px;
-  height: 20px;
-  border: 1px solid purple;
+  width: 25px;
+  height: 25px;
+  border: 3px solid grey;
+  border-radius: 3px;
 }
 
 .start {
-  background-color: green;
+  background-color: #20ebb5;
 }
 
 .end {
-  background-color: red;
+  background-color: #ef476f;
 }
 
 .visited {
-  background-color: gray;
+  background-color: #ffcc54;
 }
 
 .wall {
