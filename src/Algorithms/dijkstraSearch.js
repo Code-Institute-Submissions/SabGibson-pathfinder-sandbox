@@ -16,7 +16,8 @@ export const dijkstraSearch = (start, target, grid) => {
     if (closestNode.isWall) continue;
     closestNode.isVisited = true;
 
-    if (closestNode !== start) visitedInOrder.push(closestNode);
+    if (closestNode !== start || closestNode !== target)
+      visitedInOrder.push(closestNode);
     relaxation(closestNode);
   }
 

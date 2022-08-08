@@ -5,11 +5,13 @@
   border-radius: 3px;
 }
 
-.start {
+.start,
+.start.visited {
   background-color: #20ebb5;
 }
 
-.end {
+.end,
+.end.path {
   background-color: #ef476f;
 }
 
@@ -19,4 +21,9 @@
 
 .wall {
   background-color: black;
+}
+
+.path,
+.path.visited {
+  background-color: greenyellow;
 }

@@ -19,6 +19,7 @@ const Navigation = ({
   searchSpeed,
   setAlgoSelected,
   setSearchSpeed,
+  startSearch,
 }) => {
   return (
     <div className="nav-comp">
@@ -63,6 +64,7 @@ const Navigation = ({
                   rotate: 5,
                 }}
                 transition={{ duration: 0.01 }}
+                onClick={startSearch}
               />
               <motion.img
                 src={reset}

@@ -11,17 +11,20 @@ const Node = ({
   setMouseIsPressed,
   endDrag,
   nodeToAnimate,
+  pathNodeToAnimate,
 }) => {
   // Define states
   const [isStart, setIsStart] = useState(node.isStart);
   const [isEnd, setIsEnd] = useState(node.isEnd);
   const [isWall, setIsWall] = useState(node.isWall);
   const [isVisited, setIsVisited] = useState(node.isVisited);
+  const [isPath, setIsPath] = useState(node.isPath);
 
   // Define classes for node classification
   const terminalClass = isStart ? "start" : isEnd ? "end" : "";
   const wallClass = isWall ? "wall" : "";
   const visitedClass = isVisited ? "visited" : "";
+  const pathClass = isPath ? "path" : "";
 
   // Define animation variants
   const animationVariants = {
@@ -30,7 +33,7 @@ const Node = ({
     active: {
       scale: 1,
       rotate: 90,
-      transition: { duration: 0.1 },
+      transition: { duration: 0.08 },
     },
   };
 
@@ -70,6 +73,20 @@ const Node = ({
 
     visitReloadNode();
   }, [nodeToAnimate, node]);
+
+  useEffect(() => {
+    //visitReloadNode sets isVisited state in useEffect hook
+
+    const visitReloadNode = () => {
+      if (node === pathNodeToAnimate) {
+        node.isPath = true;
+        setIsPath(node.isPath);
+        cycleAnimation();
+      }
+    };
+
+    visitReloadNode();
+  }, [pathNodeToAnimate, node]);
   //Define on node interaction methods
 
   const placeDeleteWallStart = () => {
@@ -114,7 +131,7 @@ const Node = ({
   // Return Jsx node component
   return (
     <motion.div
-      className={`node ${terminalClass} ${wallClass} ${visitedClass}`}
+      className={`node ${terminalClass} ${wallClass} ${visitedClass} ${pathClass}`}
       onMouseDown={onMouseDown}
       onMouseEnter={onMouseEnter}
       onMouseUp={onMouseUp}

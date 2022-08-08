@@ -2,18 +2,21 @@ import "./App.css";
 import Pathfinder from "./components/Pathfinder";
 import Navigation from "./components/Navigation/Navigation";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   // Define UI states
-  const [activeTool, setActiveTool] = useState(null);
+  const [activeTool, setActiveTool] = useState();
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
   const [algoSelected, setAlgoSelected] = useState("Breadth First Search");
   const [searchSpeed, setSearchSpeed] = useState("Normal");
+  const [run, setRun] = useState(0);
 
   // Define UI functions
-
+  const startSearch = () => {
+    setRun((prevRun) => prevRun + 1);
+    console.log(run);
+  };
   const selectTool = (e) => {
     setActiveTool(e.target.id);
   };
@@ -30,6 +33,7 @@ function App() {
         setEndNode={setEndNode}
         setSearchSpeed={setSearchSpeed}
         setAlgoSelected={setAlgoSelected}
+        startSearch={startSearch}
       />
       <Pathfinder
         activeTool={activeTool}
@@ -41,6 +45,7 @@ function App() {
         setEndNode={setEndNode}
         algoSelected={algoSelected}
         searchSpeed={searchSpeed}
+        run={run}
       />
     </div>
   );

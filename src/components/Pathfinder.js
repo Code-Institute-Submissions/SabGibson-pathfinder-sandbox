@@ -16,6 +16,7 @@ const Pathfinder = (props) => {
   const [activeGrid, setActiveGrid] = useState([]);
   const [mouseIsPressed, setMouseIsPressed] = useState([]);
   const [nodeToAnimate, setNodeToAnimate] = useState(null);
+  const [pathNodeToAnimate, setPathNodeToAnimate] = useState(null);
 
   // unload state varivabels form props
   const activeTool = props.activeTool;
@@ -27,6 +28,7 @@ const Pathfinder = (props) => {
   const setEndNode = props.setEndNode;
   const algoSelected = props.algoSelected;
   const searchSpeed = props.searchSpeed;
+  const run = props.run;
 
   // Effect hook for init of Pathfinder (gird) component
 
@@ -39,6 +41,7 @@ const Pathfinder = (props) => {
       this.isEnd = false;
       this.isWall = false;
       this.isVisited = false;
+      this.isPath = false;
       this.distance = Infinity;
       this.prevNode = null;
       this.additionalWeight = 0;
@@ -96,8 +99,8 @@ const Pathfinder = (props) => {
 
   // Pathfinder methods for interaction with grid
 
-  const findShowPath = () => {
-    if (algoSelected === "Dijkstra's Search Algorithm") {
+  useEffect(() => {
+    const findShowPath = () => {
       const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
         startNode,
         endNode,
@@ -107,40 +110,23 @@ const Pathfinder = (props) => {
       visitedNodesInOrder.forEach((node, index) => {
         setTimeout(() => {
           setNodeToAnimate(node);
-        }, 100 * index);
+        }, 150 * index);
       });
 
-      shortestPath.forEach((node, index) => {
-        setTimeout(() => {
-          setNodeToAnimate(node);
-        }, 500 * index);
-      });
+      setTimeout(() => {
+        shortestPath.forEach((node, index) => {
+          setTimeout(() => {
+            setPathNodeToAnimate(node);
+          }, 100 * index);
+        });
+      }, 150 * visitedNodesInOrder.length);
+    };
+
+    if (startNode && endNode && activeTool === "play-button") {
+      findShowPath();
+      clearToolSelection();
     }
-
-    if (algoSelected === "A* Search Algorith") {
-      console.log("A*");
-    }
-
-    if (algoSelected === "Depth First Search") {
-      const visitedNodesInOrder = depthFirst(startNode, endNode);
-
-      visitedNodesInOrder.forEach((node, index) => {
-        setTimeout(() => {
-          setNodeToAnimate(node);
-        }, 500 * index);
-      });
-    }
-
-    if (algoSelected === "Breadth First Search") {
-      const visitedNodesInOrder = breadthFirst(startNode, endNode);
-
-      visitedNodesInOrder.forEach((node, index) => {
-        setTimeout(() => {
-          setNodeToAnimate(node);
-        }, 500 * index);
-      });
-    }
-  };
+  }, [run, startNode, endNode, activeTool, clearToolSelection, activeGrid]);
 
   //setTermialNodes function allows users to set start and end node
   let terminalType = true;
@@ -184,11 +170,7 @@ const Pathfinder = (props) => {
   const activetoolClassMod = activeTool ? "active-tool" : "";
   // Define return variable for the Pathfinder using Node component
   const functionalGrid = (
-    <div
-      className={`sb-grid ${activetoolClassMod}`}
-      onClick={setTermialNodes}
-      onDoubleClick={findShowPath}
-    >
+    <div className={`sb-grid ${activetoolClassMod}`} onClick={setTermialNodes}>
       {activeGrid.map((row, rowIndex) => {
         return (
           <div key={rowIndex}>
@@ -205,6 +187,7 @@ const Pathfinder = (props) => {
                   setMouseIsPressed={setMouseIsPressed}
                   endDrag={endDrag}
                   nodeToAnimate={nodeToAnimate}
+                  pathNodeToAnimate={pathNodeToAnimate}
                 />
               );
             })}
