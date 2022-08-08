@@ -14,8 +14,8 @@ export const depthFirst = function (start, target) {
     currNode.isVisited = true;
     if (!(currNode.isStart || currNode.isEnd)) path.push(currNode);
     for (const neighbour of currNode.neighbours) {
-      if (!neighbour.isVisited && !(neighbour in queue) && !neighbour.isWall) {
-        queue.push(neighbour);
+      if (!neighbour.isVisited && !(neighbour in stack) && !neighbour.isWall) {
+        stack.push(neighbour);
       }
     }
   }

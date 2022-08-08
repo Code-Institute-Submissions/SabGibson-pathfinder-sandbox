@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import "./Pathfinder.css";
 import Node from "./Node/Node";
 import { breadthFirst } from "../Algorithms/breadthFirstSearch.js";
+import { depthFirst } from "../Algorithms/depthFirstSearch";
+import { aStarSearch } from "../Algorithms/aStarSearch";
+import { dijkstraSearch } from "../Algorithms/dijkstraSearch";
 // variables that define grid size
 const rows = 20;
 const cols = 50;
@@ -34,6 +37,9 @@ const Pathfinder = (props) => {
       this.isEnd = false;
       this.isWall = false;
       this.isVisited = false;
+      this.distance = Infinity;
+      this.prevNode = null;
+      this.additionalWeight = 0;
       this.neighbours = [];
       this.addNeighbours = (grid) => {
         let i = this.xVal;
@@ -89,8 +95,12 @@ const Pathfinder = (props) => {
   // Pathfinder methods for interaction with grid
 
   const showPath = () => {
-    const visitedNodesInOrder = breadthFirst(startNode, endNode);
-
+    // const visitedNodesInOrder = breadthFirst(startNode, endNode);
+    const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
+      startNode,
+      endNode,
+      activeGrid
+    );
     visitedNodesInOrder.forEach((node, index) => {
       setTimeout(() => {
         setNodeToAnimate(node);
