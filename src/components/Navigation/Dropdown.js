@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 const Dropdown = (props) => {
   //Defiene componant states
   const [openStatus, setOpenStatus] = useState("false");
-  const [dropdownValue, setDropdownValue] = useState([props.default]);
+  const [dropdownValue, setDropdownValue] = useState([props.defaultSetting]);
 
   // unpack dropdown list items
   const dropdownContents = props.dropdownItems;
+  const externalStateSetter = props.externalStateSetter;
 
   // Define compnant interactions
   const changeDropdown = () => {
@@ -19,7 +20,8 @@ const Dropdown = (props) => {
   };
 
   const selectDropdownItem = (e) => {
-    setDropdownValue(e.target.innerHTML);
+    externalStateSetter(e.target.innerText);
+    setDropdownValue(e.target.innerText);
   };
 
   return (

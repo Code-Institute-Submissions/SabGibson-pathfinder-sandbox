@@ -13,7 +13,13 @@ import logo from "../images/big-logo-text.svg";
 // import other react componants
 import Dropdown from "./Dropdown";
 
-const Navigation = ({ selectTool }) => {
+const Navigation = ({
+  selectTool,
+  selectAlgo,
+  searchSpeed,
+  setAlgoSelected,
+  setSearchSpeed,
+}) => {
   return (
     <div className="nav-comp">
       <nav className="nav-bar">
@@ -31,14 +37,16 @@ const Navigation = ({ selectTool }) => {
                   "A* Search Algorith",
                   "Dijkstra's Search Algorithm",
                 ]}
-                default={"Breadth First Search"}
+                defaultSetting={"Breadth First Search"}
+                externalStateSetter={setAlgoSelected}
               />
             </div>
             <div className="nav-item">
               <h3 className="nav-label">Select Speed</h3>
               <Dropdown
                 dropdownItems={["Slow", "Normal", "Fast"]}
-                default={"Normal"}
+                defaultSetting={"Normal"}
+                externalStateSetter={setSearchSpeed}
               />
             </div>
           </div>

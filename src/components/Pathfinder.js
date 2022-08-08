@@ -25,6 +25,8 @@ const Pathfinder = (props) => {
   const setStartNode = props.setStartNode;
   const endNode = props.endNode;
   const setEndNode = props.setEndNode;
+  const algoSelected = props.algoSelected;
+  const searchSpeed = props.searchSpeed;
 
   // Effect hook for init of Pathfinder (gird) component
 
@@ -94,18 +96,50 @@ const Pathfinder = (props) => {
 
   // Pathfinder methods for interaction with grid
 
-  const showPath = () => {
-    // const visitedNodesInOrder = breadthFirst(startNode, endNode);
-    const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
-      startNode,
-      endNode,
-      activeGrid
-    );
-    visitedNodesInOrder.forEach((node, index) => {
-      setTimeout(() => {
-        setNodeToAnimate(node);
-      }, 100 * index);
-    });
+  const findShowPath = () => {
+    if (algoSelected === "Dijkstra's Search Algorithm") {
+      const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
+        startNode,
+        endNode,
+        activeGrid
+      );
+
+      visitedNodesInOrder.forEach((node, index) => {
+        setTimeout(() => {
+          setNodeToAnimate(node);
+        }, 100 * index);
+      });
+
+      shortestPath.forEach((node, index) => {
+        setTimeout(() => {
+          setNodeToAnimate(node);
+        }, 500 * index);
+      });
+    }
+
+    if (algoSelected === "A* Search Algorith") {
+      console.log("A*");
+    }
+
+    if (algoSelected === "Depth First Search") {
+      const visitedNodesInOrder = depthFirst(startNode, endNode);
+
+      visitedNodesInOrder.forEach((node, index) => {
+        setTimeout(() => {
+          setNodeToAnimate(node);
+        }, 500 * index);
+      });
+    }
+
+    if (algoSelected === "Breadth First Search") {
+      const visitedNodesInOrder = breadthFirst(startNode, endNode);
+
+      visitedNodesInOrder.forEach((node, index) => {
+        setTimeout(() => {
+          setNodeToAnimate(node);
+        }, 500 * index);
+      });
+    }
   };
 
   //setTermialNodes function allows users to set start and end node
@@ -153,7 +187,7 @@ const Pathfinder = (props) => {
     <div
       className={`sb-grid ${activetoolClassMod}`}
       onClick={setTermialNodes}
-      onDoubleClick={showPath}
+      onDoubleClick={findShowPath}
     >
       {activeGrid.map((row, rowIndex) => {
         return (
