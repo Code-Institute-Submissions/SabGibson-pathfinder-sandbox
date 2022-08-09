@@ -9,6 +9,7 @@ const Dropdown = (props) => {
   // unpack dropdown list items
   const dropdownContents = props.dropdownItems;
   const externalStateSetter = props.externalStateSetter;
+  const navStatus = props.navStatus;
 
   // Define compnant interactions
   const changeDropdown = () => {
@@ -25,7 +26,7 @@ const Dropdown = (props) => {
   };
 
   return (
-    <div className="dropdown" onClick={changeDropdown}>
+    <div className={`dropdown ${navStatus}`} onClick={changeDropdown}>
       <div className="select">
         <span className="selected">{dropdownValue}</span>
         <div className={`arrow ${openStatus}`}></div>

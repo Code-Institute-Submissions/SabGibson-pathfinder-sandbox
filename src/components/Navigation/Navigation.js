@@ -17,17 +17,15 @@ import Dropdown from "./Dropdown";
 
 const Navigation = ({
   selectTool,
-  selectAlgo,
-  searchSpeed,
   setAlgoSelected,
   setSearchSpeed,
   startSearch,
 }) => {
   // navigation states
-  const [openStatus, setOpenStatus] = useState("false");
+  const [navStatus, setOpenStatus] = useState("false");
 
   const changeNav = () => {
-    if (openStatus !== "true") {
+    if (navStatus !== "true") {
       setOpenStatus("true");
     } else {
       setOpenStatus("false");
@@ -36,11 +34,11 @@ const Navigation = ({
 
   return (
     <div className="nav-comp">
-      <nav className="nav-bar">
+      <nav className={`nav-bar ${navStatus}`}>
         <div className="logo">
           <img className="logo-img" src={logo} alt="" />
         </div>
-        <div className="nav-toggle">
+        <div className="nav-toggle" onClick={changeNav}>
           <img src={burger} alt="" />
         </div>
         <div className="tool-pane">
@@ -51,8 +49,9 @@ const Navigation = ({
                 <motion.img
                   src={algo}
                   alt="build wall icon"
-                  className="action-icon select-icon"
-                  id="make-wall-button"
+                  className={`action-icon select-icon ${navStatus}`}
+                  id="reveal-algo-dropdown"
+                  onClick={changeNav}
                   whileHover={{
                     scale: 1.1,
                     rotate: 5,
@@ -69,6 +68,7 @@ const Navigation = ({
                   ]}
                   defaultSetting={"Breadth First Search"}
                   externalStateSetter={setAlgoSelected}
+                  navStatus={navStatus}
                 />
               </div>
             </div>
@@ -77,9 +77,10 @@ const Navigation = ({
               <div className="sel-wrapper">
                 <motion.img
                   src={speed}
-                  alt="build wall icon"
-                  className="action-icon select-icon"
-                  id="make-wall-button"
+                  alt="select-speed-icon"
+                  onClick={changeNav}
+                  className={`action-icon select-icon ${navStatus}`}
+                  id="reveal-speed-dropdown"
                   whileHover={{
                     scale: 1.1,
                     rotate: 5,
@@ -90,6 +91,7 @@ const Navigation = ({
                   dropdownItems={["Slow", "Normal", "Fast"]}
                   defaultSetting={"Normal"}
                   externalStateSetter={setSearchSpeed}
+                  navStatus={navStatus}
                 />
               </div>
             </div>

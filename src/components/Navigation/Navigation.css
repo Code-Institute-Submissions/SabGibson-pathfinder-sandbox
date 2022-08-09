@@ -167,6 +167,25 @@
     align-items: center;
     justify-content: center;
   }
+  .nav-bar.true {
+    width: 20rem;
+  }
+
+  .nav-bar.true .tools {
+    display: block;
+  }
+
+  .dropdown.true {
+    display: flex;
+  }
+
+  .action-icon.select-icon.true {
+    display: none;
+  }
+
+  .nav-bar.true > .tool-pane {
+    width: 20rem;
+  }
   .nav-bar {
     display: flex;
     align-items: center;
