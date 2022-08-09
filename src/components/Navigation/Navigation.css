@@ -153,6 +153,10 @@
   padding-inline-start: 0px;
 }
 
+.how-to-use * {
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 1000px) {
   .sb-grid {
     margin-left: 5rem;
@@ -253,11 +257,12 @@
   }
 }
 
-@media screen and (min-width: 769px) {
-}
+@media screen and (max-width: 340px) {
+  .tool-pane * {
+    margin-bottom: 3px;
+  }
 
-@media screen and (max-width: 475px) {
-}
-
-@media screen and (max-width: 510px) {
+  .nav-toggle {
+    margin-bottom: 5px;
+  }
 }

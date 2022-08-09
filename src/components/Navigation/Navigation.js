@@ -22,9 +22,10 @@ const Navigation = ({
   startSearch,
   resetGrid,
 }) => {
-  // navigation states
+  // navigation states for open close
   const [navStatus, setOpenStatus] = useState("false");
 
+  // function setter function to change state of nav componant
   const changeNav = () => {
     if (navStatus !== "true") {
       setOpenStatus("true");
@@ -37,10 +38,14 @@ const Navigation = ({
     <div className="nav-comp">
       <nav className={`nav-bar ${navStatus}`}>
         <div className="logo">
-          <img className="logo-img" src={logo} alt="" />
+          <img
+            className="logo-img"
+            src={logo}
+            alt="draph search sandbox logo"
+          />
         </div>
         <div className="nav-toggle" onClick={changeNav}>
-          <img src={burger} alt="" />
+          <img src={burger} alt="burger menu" />
         </div>
         <div className="tool-pane">
           <div className="algo-tools">
@@ -49,7 +54,7 @@ const Navigation = ({
               <div className="sel-wrapper">
                 <motion.img
                   src={algo}
-                  alt="build wall icon"
+                  alt="select algorithm icon"
                   className={`action-icon select-icon ${navStatus}`}
                   id="reveal-algo-dropdown"
                   onClick={changeNav}
@@ -66,7 +71,7 @@ const Navigation = ({
                     "Depth First Search",
                     "Dijkstra's Search Algorithm",
                   ]}
-                  defaultSetting={"Breadth First Search"}
+                  defaultSetting={"Dijkstra's Search Algorithm"}
                   externalStateSetter={setAlgoSelected}
                   navStatus={navStatus}
                 />
@@ -77,7 +82,7 @@ const Navigation = ({
               <div className="sel-wrapper">
                 <motion.img
                   src={speed}
-                  alt="select-speed-icon"
+                  alt="select speed icon"
                   onClick={changeNav}
                   className={`action-icon select-icon ${navStatus}`}
                   id="reveal-speed-dropdown"
@@ -128,7 +133,7 @@ const Navigation = ({
               <h3 className="nav-label">Edit Tools</h3>
               <motion.img
                 src={flag}
-                alt="Start end icon"
+                alt="Start end flag icon"
                 className="action-icon"
                 id="place-start-end-button"
                 whileHover={{
@@ -150,7 +155,7 @@ const Navigation = ({
               />
               <motion.img
                 src={bin}
-                alt="delete wall icon"
+                alt="bin delete wall icon"
                 className="action-icon"
                 id="delete-wall-button"
                 whileHover={{

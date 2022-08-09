@@ -72,7 +72,7 @@ const Node = ({
     };
 
     visitReloadNode();
-  }, [nodeToAnimate, node]);
+  }, [nodeToAnimate, node, cycleAnimation]);
 
   useEffect(() => {
     //visitReloadNode sets isVisited state in useEffect hook
@@ -86,7 +86,7 @@ const Node = ({
     };
 
     pathReloadNode();
-  }, [pathNodeToAnimate, node]);
+  }, [pathNodeToAnimate, node, cycleAnimation]);
   //Define on node interaction methods
 
   const placeDeleteWallStart = () => {

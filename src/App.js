@@ -9,7 +9,9 @@ function App() {
   const [activeTool, setActiveTool] = useState();
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
-  const [algoSelected, setAlgoSelected] = useState("Breadth First Search");
+  const [algoSelected, setAlgoSelected] = useState(
+    "Dijkstra's Search Algorithm"
+  );
   const [searchSpeed, setSearchSpeed] = useState("Normal");
   const [run, setRun] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
@@ -57,6 +59,7 @@ function App() {
     }
   }, [speed, searchSpeed]);
 
+  // useEffect to set cols number for grid relative to screen
   useEffect(() => {
     if (width < 1000) {
       let colNum = Math.floor((width - 100) / 25 - 1);

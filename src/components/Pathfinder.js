@@ -32,6 +32,7 @@ const Pathfinder = (props) => {
   // variables that define grid size
 
   // Effect hook for init of Pathfinder (gird) component
+
   useEffect(() => {
     // node object constructor
     function nodeObject(col, row) {
@@ -97,7 +98,7 @@ const Pathfinder = (props) => {
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
     clearToolSelection();
-  }, [cols]);
+  }, [cols, clearToolSelection]);
 
   // Pathfinder methods for interaction with grid
   useEffect(() => {
@@ -105,6 +106,7 @@ const Pathfinder = (props) => {
       if (algoSelected === "Breadth First Search") {
         const visitedNodesInOrder = breadthFirst(startNode, endNode);
 
+        // visualize BFS visited nodes
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
@@ -114,6 +116,7 @@ const Pathfinder = (props) => {
       if (algoSelected === "Depth First Search") {
         const visitedNodesInOrder = depthFirst(startNode, endNode);
 
+        // visualize FS visited nodes
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
@@ -127,13 +130,13 @@ const Pathfinder = (props) => {
           endNode,
           activeGrid
         );
-
+        // visualize Dijkstra's  visited nodes
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
           }, speedVar * index);
         });
-
+        // visualize Dijkstra's  shortest path nodes
         setTimeout(() => {
           shortestPath.forEach((node, index) => {
             setTimeout(() => {

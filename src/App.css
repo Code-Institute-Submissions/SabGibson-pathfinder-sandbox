@@ -2,17 +2,6 @@
   box-sizing: border-box;
 }
 
-body::-webkit-scrollbar {
-  width: 0.3rem;
-}
-
-body::-webkit-scrollbar-track {
-  background: black;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: aquamarine;
-}
 @media screen and (min-width: 1024px) {
   body {
     max-width: 1220px;
@@ -24,5 +13,9 @@ body::-webkit-scrollbar-thumb {
   main {
     margin-left: 5rem;
     padding: 1rem;
+  }
+
+  body {
+    font-size: 0.7rem;
   }
 }
