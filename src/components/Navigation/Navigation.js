@@ -126,6 +126,17 @@ const Navigation = ({
             <div className="sub-tools">
               <h3 className="nav-label">Edit Tools</h3>
               <motion.img
+                src={flag}
+                alt="Start end icon"
+                className="action-icon"
+                id="place-start-end-button"
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 5,
+                }}
+                transition={{ duration: 0.01 }}
+              />
+              <motion.img
                 src={wall}
                 alt="build wall icon"
                 className="action-icon"
@@ -141,17 +152,6 @@ const Navigation = ({
                 alt="delete wall icon"
                 className="action-icon"
                 id="delete-wall-button"
-                whileHover={{
-                  scale: 1.1,
-                  rotate: 5,
-                }}
-                transition={{ duration: 0.01 }}
-              />
-              <motion.img
-                src={flag}
-                alt="Start end icon"
-                className="action-icon"
-                id="place-start-end-button"
                 whileHover={{
                   scale: 1.1,
                   rotate: 5,
