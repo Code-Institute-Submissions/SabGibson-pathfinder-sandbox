@@ -97,8 +97,7 @@ const Pathfinder = (props) => {
     addNodeNeighbours(startGrid);
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
-    clearToolSelection();
-  }, [cols, clearToolSelection]);
+  }, [cols]);
 
   // Pathfinder methods for interaction with grid
   useEffect(() => {
