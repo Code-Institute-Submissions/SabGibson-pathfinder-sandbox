@@ -11,17 +11,13 @@ function App() {
   const [algoSelected, setAlgoSelected] = useState("Breadth First Search");
   const [searchSpeed, setSearchSpeed] = useState("Normal");
   const [run, setRun] = useState(0);
-  const [reset, setRest] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
   const [cols, setCols] = useState();
+  const [speed, setSpeed] = useState();
 
   // Define UI functions
   const startSearch = () => {
     setRun((prevRun) => prevRun + 1);
-  };
-
-  const resetGrid = () => {
-    setRest((prevRest) => prevRest + 1);
   };
 
   const selectTool = (e) => {
@@ -36,11 +32,29 @@ function App() {
     setWidth(window.innerWidth);
   };
 
+  const resetGrid = () => {
+    window.location.reload(true);
+  };
+
   // useEffect for screen width on resize
   useEffect(() => {
     window.addEventListener("resize", widthOfScreen);
     return () => window.removeEventListener("resize", widthOfScreen);
   }, [width]);
+
+  useEffect(() => {
+    if (searchSpeed === "Slow") {
+      setSpeed(180);
+    }
+
+    if (searchSpeed === "Normal") {
+      setSpeed(150);
+    }
+
+    if (searchSpeed === "Fast") {
+      setSpeed(110);
+    }
+  }, [speed, searchSpeed]);
 
   useEffect(() => {
     if (width < 1000) {
@@ -75,7 +89,7 @@ function App() {
         run={run}
         width={width}
         cols={cols}
-        reset={reset}
+        speed={speed}
       />
     </div>
   );

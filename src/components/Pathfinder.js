@@ -29,7 +29,7 @@ const Pathfinder = (props) => {
   const searchSpeed = props.searchSpeed;
   const run = props.run;
   const cols = props.cols;
-  const reset = props.reset;
+  const speedVar = props.speed;
   // variables that define grid size
 
   // Effect hook for init of Pathfinder (gird) component
@@ -98,7 +98,8 @@ const Pathfinder = (props) => {
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
     clearToolSelection();
-  }, [cols, reset]);
+    console.log("ready");
+  }, [cols]);
 
   // Pathfinder methods for interaction with grid
   useEffect(() => {
@@ -109,7 +110,7 @@ const Pathfinder = (props) => {
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
-          }, 150 * index);
+          }, speedVar * index);
         });
       }
       if (algoSelected === "Depth First Search") {
@@ -118,7 +119,7 @@ const Pathfinder = (props) => {
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
-          }, 150 * index);
+          }, speedVar * index);
         });
       }
       if (algoSelected === "A* Search Algorith") {
@@ -134,7 +135,7 @@ const Pathfinder = (props) => {
         visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
             setNodeToAnimate(node);
-          }, 150 * index);
+          }, speedVar * index);
         });
 
         setTimeout(() => {
@@ -143,7 +144,7 @@ const Pathfinder = (props) => {
               setPathNodeToAnimate(node);
             }, 100 * index);
           });
-        }, 150 * visitedNodesInOrder.length);
+        }, speedVar * visitedNodesInOrder.length);
       }
     };
 
@@ -160,6 +161,7 @@ const Pathfinder = (props) => {
     activeGrid,
     algoSelected,
     searchSpeed,
+    speedVar,
   ]);
 
   //setTermialNodes function allows users to set start and end node

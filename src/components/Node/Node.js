@@ -77,7 +77,7 @@ const Node = ({
   useEffect(() => {
     //visitReloadNode sets isVisited state in useEffect hook
 
-    const visitReloadNode = () => {
+    const pathReloadNode = () => {
       if (node === pathNodeToAnimate) {
         node.isPath = true;
         setIsPath(node.isPath);
@@ -85,7 +85,7 @@ const Node = ({
       }
     };
 
-    visitReloadNode();
+    pathReloadNode();
   }, [pathNodeToAnimate, node]);
   //Define on node interaction methods
 
@@ -108,7 +108,7 @@ const Node = ({
     setIsWall(node.isWall);
   };
 
-  const onMouseDown = (e) => {
+  const onPointerDown = (e) => {
     if (e.altKey) {
       console.log(node);
     } else {
@@ -116,11 +116,11 @@ const Node = ({
     }
   };
 
-  const onMouseEnter = (e) => {
+  const onPointerEnter = (e) => {
     placeDeleteWallOnEnter();
   };
 
-  const onMouseUp = (e) => {
+  const onPointerUp = (e) => {
     if (mouseIsPressed && activeTool === "make-wall-button") {
       endDrag();
     } else if (mouseIsPressed && activeTool === "delete-wall-button") {
@@ -132,9 +132,9 @@ const Node = ({
   return (
     <motion.div
       className={`node ${terminalClass} ${wallClass} ${visitedClass} ${pathClass}`}
-      onMouseDown={onMouseDown}
-      onMouseEnter={onMouseEnter}
-      onMouseUp={onMouseUp}
+      onPointerDown={onPointerDown}
+      onPointerEnter={onPointerEnter}
+      onPointerUp={onPointerUp}
       id={`id-${node.xVal}-${node.yVal}`}
       variants={animationVariants}
       animate={animation}
