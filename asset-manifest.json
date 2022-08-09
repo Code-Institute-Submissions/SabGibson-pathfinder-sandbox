@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/pathfinder-sandbox/static/css/main.97fa5dcd.css",
+    "main.js": "/pathfinder-sandbox/static/js/main.39597a73.js",
+    "static/media/big-logo-text.svg": "/pathfinder-sandbox/static/media/big-logo-text.14fc6454da91d40d1caa9d181ab96f67.svg",
+    "index.html": "/pathfinder-sandbox/index.html",
+    "static/media/reset.svg": "/pathfinder-sandbox/static/media/reset.3d74b354c45e75705f93906b541da337.svg",
+    "static/media/algo-select.svg": "/pathfinder-sandbox/static/media/algo-select.72b85f03014bdc14b1b538444dd023b2.svg",
+    "static/media/bin.svg": "/pathfinder-sandbox/static/media/bin.2196d24bfdb92a6d2b8b9dc586ec17d9.svg",
+    "static/media/wall.svg": "/pathfinder-sandbox/static/media/wall.f53c21c9a924a6e9f89a4578d85fe0c2.svg",
+    "static/media/flag.svg": "/pathfinder-sandbox/static/media/flag.1aed936f58ee15b805cab5d95dbbcb4b.svg",
+    "static/media/burger.svg": "/pathfinder-sandbox/static/media/burger.4f09c1903711c5ab44d05d1849e4bffa.svg",
+    "static/media/fast-forward.svg": "/pathfinder-sandbox/static/media/fast-forward.7599fd91f1ea3fa2c7f104bc034b0a30.svg",
+    "static/media/play.svg": "/pathfinder-sandbox/static/media/play.b16c5b8867094da8399977dc8c82d269.svg",
+    "main.97fa5dcd.css.map": "/pathfinder-sandbox/static/css/main.97fa5dcd.css.map",
+    "main.39597a73.js.map": "/pathfinder-sandbox/static/js/main.39597a73.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.97fa5dcd.css",
+    "static/js/main.39597a73.js"
+  ]
+}
