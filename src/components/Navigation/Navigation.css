@@ -137,6 +137,22 @@
   display: none;
   margin-bottom: 50px;
 }
+
+.how-to-use {
+  margin: 30px;
+  background: #004f59;
+  color: #fff;
+  padding: 20px;
+  border: 3px solid #004f59;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.how-to-use > ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
 @media screen and (max-width: 1000px) {
   .sb-grid {
     margin-left: 5rem;

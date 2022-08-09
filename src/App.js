@@ -77,6 +77,21 @@ function App() {
         startSearch={startSearch}
         resetGrid={resetGrid}
       />
+      <div className="flex-wrapper">
+        <Card
+          classType={"how-to-use"}
+          title={"Instructions:"}
+          type={"info-card"}
+          inputs={[
+            "Step 1: Select flag icon",
+            "Step 2: Double click square to place start node",
+            "Step 3: Single click square to place end node",
+            "Step 4 Optional : select wall icon to draw wall",
+            "Step 5: Select search settings and Run",
+            "Step 6: Press the reset button and repeat",
+          ]}
+        />
+      </div>
       <Pathfinder
         activeTool={activeTool}
         setActiveTool={setActiveTool}
@@ -95,28 +110,12 @@ function App() {
       <div className="flex-wrapper">
         <Card
           classType={"how-to-use"}
-          title={"Instructions:"}
-          type={"info-card"}
-          inputs={[
-            "Step 1: Select flag icon",
-            "Step 2: Double click square to place start node",
-            "Step 3: Single click square to place end node",
-            "Step 4 Optional : select wall icon to draw wall",
-            "Step 5: Select search settings and Run",
-            "Step 6: Press the reset button and repeat",
-          ]}
-        />
-        <Card
-          classType={"how-to-use"}
           title={"Hints & Tips:"}
           type={"info-card"}
           inputs={[
-            "Step 1: Select flag icon",
-            "Step 2: Double click square to place start node",
-            "Step 3: Single click square to place end node",
-            "Step 4 Optional : select wall icon to draw wall",
-            "Step 5: Select search settings and Run",
-            "Step 6: Press the reset button and repeat",
+            "Breadth First Search BFS : Is a graph traversal method that uses the queue data structure.The BFS search in this sandbox shows the traversal to the target node, but not the path. BFS is used to prove I any path exists between nodes",
+            "Depth First Search DFS : Is a graph traversal method that uses the stack data structure.The DFS search in this sandbox shows the traversal to the target node, but not the path.BFS is used to prove I any path exists between nodes",
+            "Dijkstra’s Search : Is a graph search algorithm that uses minimisation to find the optimal path. It is a greedy algorithm and does not work with negative weights.",
           ]}
         />
       </div>
