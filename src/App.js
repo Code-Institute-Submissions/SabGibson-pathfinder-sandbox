@@ -1,7 +1,7 @@
 import "./App.css";
 import Pathfinder from "./components/Pathfinder";
 import Navigation from "./components/Navigation/Navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   // Define UI states
@@ -11,11 +11,12 @@ function App() {
   const [algoSelected, setAlgoSelected] = useState("Breadth First Search");
   const [searchSpeed, setSearchSpeed] = useState("Normal");
   const [run, setRun] = useState(0);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [cols, setCols] = useState();
 
   // Define UI functions
   const startSearch = () => {
     setRun((prevRun) => prevRun + 1);
-    console.log(run);
   };
   const selectTool = (e) => {
     setActiveTool(e.target.id);
@@ -24,6 +25,26 @@ function App() {
   const clearToolSelection = () => {
     setActiveTool(null);
   };
+
+  const widthOfScreen = () => {
+    setWidth(window.innerWidth);
+    console.log(cols);
+  };
+
+  // useEffect for screen width on resize
+  useEffect(() => {
+    window.addEventListener("resize", widthOfScreen);
+    return () => window.removeEventListener("resize", widthOfScreen);
+  }, [width]);
+
+  useEffect(() => {
+    if (width < 1000) {
+      let colNum = Math.floor((width - 100) / 25 - 1);
+      setCols(colNum);
+    } else {
+      setCols(40);
+    }
+  }, [cols, width]);
 
   return (
     <div className="App">
@@ -46,6 +67,8 @@ function App() {
         algoSelected={algoSelected}
         searchSpeed={searchSpeed}
         run={run}
+        width={width}
+        cols={cols}
       />
     </div>
   );

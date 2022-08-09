@@ -6,9 +6,9 @@ import { breadthFirst } from "../Algorithms/breadthFirstSearch.js";
 import { depthFirst } from "../Algorithms/depthFirstSearch";
 import { aStarSearch } from "../Algorithms/aStarSearch";
 import { dijkstraSearch } from "../Algorithms/dijkstraSearch";
-// variables that define grid size
+
+// let cols = 45;
 const rows = 20;
-const cols = 45;
 
 // Pathfinder state functionless component that will be main interface for app
 const Pathfinder = (props) => {
@@ -29,6 +29,8 @@ const Pathfinder = (props) => {
   const algoSelected = props.algoSelected;
   const searchSpeed = props.searchSpeed;
   const run = props.run;
+  const cols = props.cols;
+  // variables that define grid size
 
   // Effect hook for init of Pathfinder (gird) component
 
@@ -95,7 +97,7 @@ const Pathfinder = (props) => {
     addNodeNeighbours(startGrid);
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
-  }, []);
+  }, [cols]);
 
   // Pathfinder methods for interaction with grid
 
