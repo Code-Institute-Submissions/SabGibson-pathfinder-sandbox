@@ -5,6 +5,14 @@
   position: relative;
 }
 
+.flex-wrapper {
+  margin: 0px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
 .logo {
   display: flex;
   align-content: center;
@@ -138,6 +146,9 @@
     margin: 0;
   }
 
+  .flex-wrapper {
+    margin-left: 5rem;
+  }
   .sub-tools {
     margin-right: 0px;
     align-items: center;

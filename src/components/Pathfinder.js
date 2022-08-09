@@ -4,7 +4,6 @@ import "./Pathfinder.css";
 import Node from "./Node/Node";
 import { breadthFirst } from "../Algorithms/breadthFirstSearch.js";
 import { depthFirst } from "../Algorithms/depthFirstSearch";
-import { aStarSearch } from "../Algorithms/aStarSearch";
 import { dijkstraSearch } from "../Algorithms/dijkstraSearch";
 
 const rows = 20;
@@ -98,7 +97,6 @@ const Pathfinder = (props) => {
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
     clearToolSelection();
-    console.log("ready");
   }, [cols]);
 
   // Pathfinder methods for interaction with grid
@@ -122,9 +120,7 @@ const Pathfinder = (props) => {
           }, speedVar * index);
         });
       }
-      if (algoSelected === "A* Search Algorith") {
-        console.log("A* to be added");
-      }
+
       if (algoSelected === "Dijkstra's Search Algorithm") {
         const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
           startNode,

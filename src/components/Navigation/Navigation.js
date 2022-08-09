@@ -64,7 +64,6 @@ const Navigation = ({
                   dropdownItems={[
                     "Breadth First Search",
                     "Depth First Search",
-                    "A* Search Algorith",
                     "Dijkstra's Search Algorithm",
                   ]}
                   defaultSetting={"Breadth First Search"}

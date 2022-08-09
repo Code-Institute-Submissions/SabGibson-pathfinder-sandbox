@@ -1,6 +1,7 @@
 import "./App.css";
 import Pathfinder from "./components/Pathfinder";
 import Navigation from "./components/Navigation/Navigation";
+import Card from "./components/Card";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -91,6 +92,34 @@ function App() {
         cols={cols}
         speed={speed}
       />
+      <div className="flex-wrapper">
+        <Card
+          classType={"how-to-use"}
+          title={"Instructions:"}
+          type={"info-card"}
+          inputs={[
+            "Step 1: Select flag icon",
+            "Step 2: Double click square to place start node",
+            "Step 3: Single click square to place end node",
+            "Step 4 Optional : select wall icon to draw wall",
+            "Step 5: Select search settings and Run",
+            "Step 6: Press the reset button and repeat",
+          ]}
+        />
+        <Card
+          classType={"how-to-use"}
+          title={"Hints & Tips:"}
+          type={"info-card"}
+          inputs={[
+            "Step 1: Select flag icon",
+            "Step 2: Double click square to place start node",
+            "Step 3: Single click square to place end node",
+            "Step 4 Optional : select wall icon to draw wall",
+            "Step 5: Select search settings and Run",
+            "Step 6: Press the reset button and repeat",
+          ]}
+        />
+      </div>
     </div>
   );
 }

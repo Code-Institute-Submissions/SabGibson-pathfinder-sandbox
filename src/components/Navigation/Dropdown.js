@@ -38,7 +38,7 @@ const Dropdown = (props) => {
               key={index}
               whileHover={{ scale: 1.2, color: "#fff", originX: 0 }}
             >
-              {item}{" "}
+              {item}
             </motion.li>
           );
         })}
