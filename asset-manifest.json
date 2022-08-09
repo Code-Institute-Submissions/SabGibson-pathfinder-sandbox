@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pathfinder-sandbox/static/css/main.941733e0.css",
-    "main.js": "/pathfinder-sandbox/static/js/main.ee2be4bd.js",
+    "main.js": "/pathfinder-sandbox/static/js/main.2eafe90e.js",
     "static/media/big-logo-text.svg": "/pathfinder-sandbox/static/media/big-logo-text.14fc6454da91d40d1caa9d181ab96f67.svg",
     "index.html": "/pathfinder-sandbox/index.html",
     "static/media/reset.svg": "/pathfinder-sandbox/static/media/reset.3d74b354c45e75705f93906b541da337.svg",
@@ -13,10 +13,10 @@
     "static/media/fast-forward.svg": "/pathfinder-sandbox/static/media/fast-forward.7599fd91f1ea3fa2c7f104bc034b0a30.svg",
     "static/media/play.svg": "/pathfinder-sandbox/static/media/play.b16c5b8867094da8399977dc8c82d269.svg",
     "main.941733e0.css.map": "/pathfinder-sandbox/static/css/main.941733e0.css.map",
-    "main.ee2be4bd.js.map": "/pathfinder-sandbox/static/js/main.ee2be4bd.js.map"
+    "main.2eafe90e.js.map": "/pathfinder-sandbox/static/js/main.2eafe90e.js.map"
   },
   "entrypoints": [
     "static/css/main.941733e0.css",
-    "static/js/main.ee2be4bd.js"
+    "static/js/main.2eafe90e.js"
   ]
 }
