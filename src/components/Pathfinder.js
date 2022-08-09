@@ -7,7 +7,6 @@ import { depthFirst } from "../Algorithms/depthFirstSearch";
 import { aStarSearch } from "../Algorithms/aStarSearch";
 import { dijkstraSearch } from "../Algorithms/dijkstraSearch";
 
-// let cols = 45;
 const rows = 20;
 
 // Pathfinder state functionless component that will be main interface for app
@@ -30,10 +29,10 @@ const Pathfinder = (props) => {
   const searchSpeed = props.searchSpeed;
   const run = props.run;
   const cols = props.cols;
+  const reset = props.reset;
   // variables that define grid size
 
   // Effect hook for init of Pathfinder (gird) component
-
   useEffect(() => {
     // node object constructor
     function nodeObject(col, row) {
@@ -72,6 +71,7 @@ const Pathfinder = (props) => {
         }
       };
     }
+
     // gridInit() function creates 2D array and populates with node objects
     const gridInit = () => {
       const grid = [];
@@ -97,10 +97,10 @@ const Pathfinder = (props) => {
     addNodeNeighbours(startGrid);
     setMouseIsPressed(false);
     setActiveGrid(startGrid);
-  }, [cols]);
+    clearToolSelection();
+  }, [cols, reset]);
 
   // Pathfinder methods for interaction with grid
-
   useEffect(() => {
     const findShowPath = () => {
       if (algoSelected === "Breadth First Search") {

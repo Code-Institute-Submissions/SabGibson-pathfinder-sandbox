@@ -11,6 +11,7 @@ function App() {
   const [algoSelected, setAlgoSelected] = useState("Breadth First Search");
   const [searchSpeed, setSearchSpeed] = useState("Normal");
   const [run, setRun] = useState(0);
+  const [reset, setRest] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
   const [cols, setCols] = useState();
 
@@ -18,6 +19,11 @@ function App() {
   const startSearch = () => {
     setRun((prevRun) => prevRun + 1);
   };
+
+  const resetGrid = () => {
+    setRest((prevRest) => prevRest + 1);
+  };
+
   const selectTool = (e) => {
     setActiveTool(e.target.id);
   };
@@ -54,6 +60,7 @@ function App() {
         setSearchSpeed={setSearchSpeed}
         setAlgoSelected={setAlgoSelected}
         startSearch={startSearch}
+        resetGrid={resetGrid}
       />
       <Pathfinder
         activeTool={activeTool}
@@ -68,6 +75,7 @@ function App() {
         run={run}
         width={width}
         cols={cols}
+        reset={reset}
       />
     </div>
   );

@@ -87,6 +87,7 @@
   border-radius: 10px;
   list-style: none;
   padding-inline-start: 0px;
+  z-index: 100;
 }
 
 .algo-list > li {

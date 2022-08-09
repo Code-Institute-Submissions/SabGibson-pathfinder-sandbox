@@ -20,6 +20,7 @@ const Navigation = ({
   setAlgoSelected,
   setSearchSpeed,
   startSearch,
+  resetGrid,
 }) => {
   // navigation states
   const [navStatus, setOpenStatus] = useState("false");
@@ -113,6 +114,7 @@ const Navigation = ({
               />
               <motion.img
                 src={reset}
+                onClick={resetGrid}
                 alt="reset grid icon"
                 className="action-icon"
                 id="reset-all-button"
