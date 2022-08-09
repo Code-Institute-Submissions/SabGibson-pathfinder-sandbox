@@ -8,7 +8,7 @@ import { aStarSearch } from "../Algorithms/aStarSearch";
 import { dijkstraSearch } from "../Algorithms/dijkstraSearch";
 // variables that define grid size
 const rows = 20;
-const cols = 50;
+const cols = 45;
 
 // Pathfinder state functionless component that will be main interface for app
 const Pathfinder = (props) => {

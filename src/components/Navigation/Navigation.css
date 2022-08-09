@@ -13,8 +13,8 @@
 }
 
 .logo-img {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 .tool-pane {
@@ -32,6 +32,9 @@
   flex-direction: row;
 }
 
+.action-icon.select-icon {
+  display: none;
+}
 .action-icon {
   fill: #fff;
   width: 40px;
@@ -46,7 +49,7 @@
 .select {
   cursor: pointer;
   border: 1px solid #6ff7f4;
-  min-width: 300px;
+  min-width: 250px;
   height: 50px;
   border-radius: 10px;
   background: #fff;
@@ -118,5 +121,96 @@
 }
 
 .sub-tools {
-  margin-right: 50px;
+  margin-right: 15px;
+}
+
+.nav-toggle {
+  display: none;
+  margin-bottom: 50px;
+}
+@media screen and (max-width: 1000px) {
+  .sb-grid {
+    margin-left: 5rem;
+  }
+  .action-icon.select-icon {
+    display: flex;
+    margin: 0;
+  }
+
+  .sub-tools {
+    margin-right: 0px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .sub-tools > * {
+    margin-bottom: 20px;
+  }
+
+  .algo-tools {
+    margin-bottom: 20px;
+  }
+
+  .tools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav-comp {
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+  .logo {
+    margin-left: 0px;
+  }
+
+  .logo-img {
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tool-pane,
+  .algo-tools {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sel-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dropdown,
+  h3 {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 769px) {
+}
+
+@media screen and (max-width: 475px) {
+}
+
+@media screen and (max-width: 510px) {
 }

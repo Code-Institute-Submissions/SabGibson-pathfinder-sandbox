@@ -1,7 +1,7 @@
 // Import external componants
 import "./Navigation.css";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
 // Import  image componants
 import wall from "../images/wall.svg";
 import bin from "../images/bin.svg";
@@ -9,7 +9,9 @@ import flag from "../images/flag.svg";
 import play from "../images/play.svg";
 import reset from "../images/reset.svg";
 import logo from "../images/big-logo-text.svg";
-
+import burger from "../images/burger.svg";
+import speed from "../images/fast-forward.svg";
+import algo from "../images/algo-select.svg";
 // import other react componants
 import Dropdown from "./Dropdown";
 
@@ -21,34 +23,75 @@ const Navigation = ({
   setSearchSpeed,
   startSearch,
 }) => {
+  // navigation states
+  const [openStatus, setOpenStatus] = useState("false");
+
+  const changeNav = () => {
+    if (openStatus !== "true") {
+      setOpenStatus("true");
+    } else {
+      setOpenStatus("false");
+    }
+  };
+
   return (
     <div className="nav-comp">
       <nav className="nav-bar">
         <div className="logo">
           <img className="logo-img" src={logo} alt="" />
         </div>
+        <div className="nav-toggle">
+          <img src={burger} alt="" />
+        </div>
         <div className="tool-pane">
           <div className="algo-tools">
             <div className="nav-item">
               <h3 className="nav-label">Select Algorithm</h3>
-              <Dropdown
-                dropdownItems={[
-                  "Breadth First Search",
-                  "Depth First Search",
-                  "A* Search Algorith",
-                  "Dijkstra's Search Algorithm",
-                ]}
-                defaultSetting={"Breadth First Search"}
-                externalStateSetter={setAlgoSelected}
-              />
+              <div className="sel-wrapper">
+                <motion.img
+                  src={algo}
+                  alt="build wall icon"
+                  className="action-icon select-icon"
+                  id="make-wall-button"
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                  }}
+                  transition={{ duration: 0.01 }}
+                />
+                <Dropdown
+                  className="algo-select"
+                  dropdownItems={[
+                    "Breadth First Search",
+                    "Depth First Search",
+                    "A* Search Algorith",
+                    "Dijkstra's Search Algorithm",
+                  ]}
+                  defaultSetting={"Breadth First Search"}
+                  externalStateSetter={setAlgoSelected}
+                />
+              </div>
             </div>
             <div className="nav-item">
               <h3 className="nav-label">Select Speed</h3>
-              <Dropdown
-                dropdownItems={["Slow", "Normal", "Fast"]}
-                defaultSetting={"Normal"}
-                externalStateSetter={setSearchSpeed}
-              />
+              <div className="sel-wrapper">
+                <motion.img
+                  src={speed}
+                  alt="build wall icon"
+                  className="action-icon select-icon"
+                  id="make-wall-button"
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                  }}
+                  transition={{ duration: 0.01 }}
+                />
+                <Dropdown
+                  dropdownItems={["Slow", "Normal", "Fast"]}
+                  defaultSetting={"Normal"}
+                  externalStateSetter={setSearchSpeed}
+                />
+              </div>
             </div>
           </div>
           <div className="tools" onClick={selectTool}>
