@@ -28,7 +28,6 @@ function App() {
 
   const widthOfScreen = () => {
     setWidth(window.innerWidth);
-    console.log(cols);
   };
 
   // useEffect for screen width on resize

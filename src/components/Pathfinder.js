@@ -103,32 +103,64 @@ const Pathfinder = (props) => {
 
   useEffect(() => {
     const findShowPath = () => {
-      const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
-        startNode,
-        endNode,
-        activeGrid
-      );
+      if (algoSelected === "Breadth First Search") {
+        const visitedNodesInOrder = breadthFirst(startNode, endNode);
 
-      visitedNodesInOrder.forEach((node, index) => {
-        setTimeout(() => {
-          setNodeToAnimate(node);
-        }, 150 * index);
-      });
-
-      setTimeout(() => {
-        shortestPath.forEach((node, index) => {
+        visitedNodesInOrder.forEach((node, index) => {
           setTimeout(() => {
-            setPathNodeToAnimate(node);
-          }, 100 * index);
+            setNodeToAnimate(node);
+          }, 150 * index);
         });
-      }, 150 * visitedNodesInOrder.length);
+      }
+      if (algoSelected === "Depth First Search") {
+        const visitedNodesInOrder = depthFirst(startNode, endNode);
+
+        visitedNodesInOrder.forEach((node, index) => {
+          setTimeout(() => {
+            setNodeToAnimate(node);
+          }, 150 * index);
+        });
+      }
+      if (algoSelected === "A* Search Algorith") {
+        console.log("A* to be added");
+      }
+      if (algoSelected === "Dijkstra's Search Algorithm") {
+        const [visitedNodesInOrder, shortestPath] = dijkstraSearch(
+          startNode,
+          endNode,
+          activeGrid
+        );
+
+        visitedNodesInOrder.forEach((node, index) => {
+          setTimeout(() => {
+            setNodeToAnimate(node);
+          }, 150 * index);
+        });
+
+        setTimeout(() => {
+          shortestPath.forEach((node, index) => {
+            setTimeout(() => {
+              setPathNodeToAnimate(node);
+            }, 100 * index);
+          });
+        }, 150 * visitedNodesInOrder.length);
+      }
     };
 
     if (startNode && endNode && activeTool === "play-button") {
       findShowPath();
       clearToolSelection();
     }
-  }, [run, startNode, endNode, activeTool, clearToolSelection, activeGrid]);
+  }, [
+    run,
+    startNode,
+    endNode,
+    activeTool,
+    clearToolSelection,
+    activeGrid,
+    algoSelected,
+    searchSpeed,
+  ]);
 
   //setTermialNodes function allows users to set start and end node
   let terminalType = true;
